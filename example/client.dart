@@ -2,7 +2,8 @@ import "dart:io";
 import "package:burt_network/burt_network.dart";
 
 final destination = SocketInfo(
-	address: InternetAddress("192.168.47.223"),
+	// address: InternetAddress("128.226.118.34"),
+	address: InternetAddress.loopbackIPv4,
 	port: 8001,
 );
 
