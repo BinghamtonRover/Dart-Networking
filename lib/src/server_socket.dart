@@ -119,9 +119,8 @@ abstract class ServerSocket extends ProtoSocket {
     }
   }
 
-  /// Sets 
   void setError(String? title, {String? body}) => _errorLog = title == null ? null : BurtLog(
-    level: BurtLogLevel.error, 
+    level: BurtLogLevel.critical, 
     title: title, 
     body: body,
   );

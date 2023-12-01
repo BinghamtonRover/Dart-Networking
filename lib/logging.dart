@@ -78,7 +78,7 @@ class BurtLogger {
   /// 
   /// Use this to indicate that the program cannot recover and must terminate.
   void critical(String title, {String? body}) {
-    logger.f(getMessage(title, body));  
+    logger.f(getMessage(title, body));
     socket?.setError(title, body: body);
   }
 }
