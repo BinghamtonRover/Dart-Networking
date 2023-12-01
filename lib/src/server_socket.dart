@@ -119,6 +119,7 @@ abstract class ServerSocket extends ProtoSocket {
     }
   }
 
+  /// Periodically sends the given error message to the Dashboard to ensure it remains visible.
   void setError(String? title, {String? body}) => _errorLog = title == null ? null : BurtLog(
     level: BurtLogLevel.critical, 
     title: title, 

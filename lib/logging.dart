@@ -9,27 +9,24 @@ export "package:logger/logger.dart";
 /// An alias for [Level].
 typedef LogLevel = Level;
 
-// /// The logger to use when running BURT programs. 
-// /// 
-// /// See [LoggerUtils] for usage. To change the minimum log level, use [Logger.level].
-// final logger = Logger(
-//   printer: SimplePrinter(colors: stdout.supportsAnsiEscapes), 
-//   filter: ProductionFilter(),
-// );
-
+/// Logs messages to the console and also sends a log to the dashboard.
 class BurtLogger {
+  /// The default console logger.
   final Logger logger = Logger(
     printer: SimplePrinter(colors: stdout.supportsAnsiEscapes), 
     filter: ProductionFilter(),
   );
 
+  /// The [ServerSocket] that will be used to send the log to the Dashboard.
   final ServerSocket? socket;
+  /// Creates a logger capable of sending network messages over the given socket.
   BurtLogger([this.socket]);
 
+  /// Formats a message with an optional body for more info.
   String getMessage(String title, String? body) => body == null
-    ? title : "$title -- $body".trim();
+    ? title : "$title\n  $body".trim();
 
-  /// Logs a debug message.
+  /// Logs a trace message.
   /// 
   /// Use this to print values you want to inspect later.
   void trace(String title, {String? body}) {
@@ -38,7 +35,7 @@ class BurtLogger {
     socket?.sendMessage(log);
   }
 
-  /// Logs a verbose message.
+  /// Logs a debug message.
   /// 
   /// Use this to print status updates that can help debugging.
   void debug(String title, {String? body}) {
@@ -65,9 +62,9 @@ class BurtLogger {
     socket?.sendMessage(log);
   }
   
-  /// Logs a warning. 
+  /// Logs an error. 
   /// 
-  /// Use this to indicate something has gone wrong but can be recovered.
+  /// Use this to indicate that a user-requested action has failed.
   void error(String title, {String? body}) {
     logger.e(getMessage(title, body));
     final log = BurtLog(level: BurtLogLevel.error, title: title, body: body);
