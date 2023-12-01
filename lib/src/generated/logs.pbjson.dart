@@ -70,13 +70,15 @@ const BurtLog$json = {
   '1': 'BurtLog',
   '2': [
     {'1': 'level', '3': 1, '4': 1, '5': 14, '6': '.BurtLogLevel', '10': 'level'},
-    {'1': 'title', '3': 3, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'body', '3': 2, '4': 1, '5': 9, '10': 'body'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'body', '3': 3, '4': 1, '5': 9, '10': 'body'},
+    {'1': 'device', '3': 4, '4': 1, '5': 14, '6': '.Device', '10': 'device'},
   ],
 };
 
 /// Descriptor for `BurtLog`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List burtLogDescriptor = $convert.base64Decode(
     'CgdCdXJ0TG9nEiMKBWxldmVsGAEgASgOMg0uQnVydExvZ0xldmVsUgVsZXZlbBIUCgV0aXRsZR'
-    'gDIAEoCVIFdGl0bGUSEgoEYm9keRgCIAEoCVIEYm9keQ==');
+    'gCIAEoCVIFdGl0bGUSEgoEYm9keRgDIAEoCVIEYm9keRIfCgZkZXZpY2UYBCABKA4yBy5EZXZp'
+    'Y2VSBmRldmljZQ==');
 

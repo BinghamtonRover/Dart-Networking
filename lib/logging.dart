@@ -17,10 +17,12 @@ class BurtLogger {
     filter: ProductionFilter(),
   );
 
+  /// The device that's sending these logs.
+  final Device? device;
   /// The [ServerSocket] that will be used to send the log to the Dashboard.
   final ServerSocket? socket;
   /// Creates a logger capable of sending network messages over the given socket.
-  BurtLogger([this.socket]);
+  BurtLogger({this.device, this.socket});
 
   /// Formats a message with an optional body for more info.
   String getMessage(String title, String? body) => body == null
@@ -31,7 +33,7 @@ class BurtLogger {
   /// Use this to print values you want to inspect later.
   void trace(String title, {String? body}) {
     logger.t(getMessage(title, body));
-    final log = BurtLog(level: BurtLogLevel.trace, title: title, body: body);
+    final log = BurtLog(level: BurtLogLevel.trace, title: title, body: body, device: device);
     socket?.sendMessage(log);
   }
 
@@ -40,7 +42,7 @@ class BurtLogger {
   /// Use this to print status updates that can help debugging.
   void debug(String title, {String? body}) {
     logger.d(getMessage(title, body));
-    final log = BurtLog(level: BurtLogLevel.debug, title: title, body: body);
+    final log = BurtLog(level: BurtLogLevel.debug, title: title, body: body, device: device);
     socket?.sendMessage(log);
   }
 
@@ -49,7 +51,7 @@ class BurtLogger {
   /// Use this to print status updates for the user to see.
   void info(String title, {String? body}) {
     logger.i(getMessage(title, body));
-    final log = BurtLog(level: BurtLogLevel.info, title: title, body: body);
+    final log = BurtLog(level: BurtLogLevel.info, title: title, body: body, device: device);
     socket?.sendMessage(log);
   }
 
@@ -58,7 +60,7 @@ class BurtLogger {
   /// Use this to indicate something has gone wrong but can be recovered.
   void warning(String title, {String? body}) {
     logger.w(getMessage(title, body));
-    final log = BurtLog(level: BurtLogLevel.warning, title: title, body: body);
+    final log = BurtLog(level: BurtLogLevel.warning, title: title, body: body, device: device);
     socket?.sendMessage(log);
   }
   
@@ -67,7 +69,7 @@ class BurtLogger {
   /// Use this to indicate that a user-requested action has failed.
   void error(String title, {String? body}) {
     logger.e(getMessage(title, body));
-    final log = BurtLog(level: BurtLogLevel.error, title: title, body: body);
+    final log = BurtLog(level: BurtLogLevel.error, title: title, body: body, device: device);
     socket?.sendMessage(log);
   }
 
