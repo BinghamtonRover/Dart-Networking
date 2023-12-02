@@ -52,7 +52,7 @@ class BurtLogger {
   void info(String title, {String? body}) {
     logger.i(getMessage(title, body));
     final log = BurtLog(level: BurtLogLevel.info, title: title, body: body, device: device);
-    socket?.sendMessage(log);
+    socket?.sendLog(log);
   }
 
   /// Logs a warning. 
@@ -61,7 +61,7 @@ class BurtLogger {
   void warning(String title, {String? body}) {
     logger.w(getMessage(title, body));
     final log = BurtLog(level: BurtLogLevel.warning, title: title, body: body, device: device);
-    socket?.sendMessage(log);
+    socket?.sendLog(log);
   }
   
   /// Logs an error. 
@@ -70,7 +70,7 @@ class BurtLogger {
   void error(String title, {String? body}) {
     logger.e(getMessage(title, body));
     final log = BurtLog(level: BurtLogLevel.error, title: title, body: body, device: device);
-    socket?.sendMessage(log);
+    socket?.sendLog(log);
   }
 
   /// Logs a critical message.
@@ -78,6 +78,7 @@ class BurtLogger {
   /// Use this to indicate that the program cannot recover and must terminate.
   void critical(String title, {String? body}) {
     logger.f(getMessage(title, body));
-    socket?.setError(title, body: body);
+    final log = BurtLog(level: BurtLogLevel.critical, title: title, body: body, device: device);
+    socket?.sendLog(log);
   }
 }
