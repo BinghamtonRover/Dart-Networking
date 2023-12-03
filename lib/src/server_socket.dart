@@ -21,7 +21,7 @@ import "proto_socket.dart";
 /// - Call [dispose] to close the socket. Override to add your own cleanup.
 abstract class ServerSocket extends ProtoSocket {
   /// A list of important logs that need to be sent when the dashboard connects.
-  List<BurtLog> _logBuffer = [];
+  final List<BurtLog> _logBuffer = [];
 
   final _logger = BurtLogger();
   
@@ -43,10 +43,11 @@ abstract class ServerSocket extends ProtoSocket {
   void onConnect(SocketInfo source) {
     destination = source;
     _logger.info("Port $port is connected to $destination");
-    Timer(const Duration(milliseconds: 500), _sendLogBuffer);
+    Timer(const Duration(milliseconds: 500), _flushLogBuffer);
   }
 
-  void _sendLogBuffer() async {
+  /// Sends all the logs in [_logBuffer].
+  Future<void> _flushLogBuffer() async {
     if (_logBuffer.isEmpty) return;
     for (final log in _logBuffer) {
       await Future<void>.delayed(const Duration(milliseconds: 100));
@@ -128,6 +129,9 @@ abstract class ServerSocket extends ProtoSocket {
     }
   }
 
+  /// Sends a log message or saves it until a Dashboard is connected.
+  /// 
+  /// Use this for logs that need to make it to the Dashboard, such as errors or warnings.
   void sendLog(BurtLog log) {
     if (isConnected) {
       sendMessage(log);
