@@ -22,7 +22,7 @@ class BurtLogger {
   /// The [ServerSocket] that will be used to send the log to the Dashboard.
   final ServerSocket? socket;
   /// Creates a logger capable of sending network messages over the given socket.
-  BurtLogger({this.device, this.socket});
+  BurtLogger({this.socket}) : device = socket?.device;
 
   /// Formats a message with an optional body for more info.
   String getMessage(String title, String? body) => body == null

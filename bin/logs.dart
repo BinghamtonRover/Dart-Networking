@@ -11,7 +11,7 @@ class LogsServer extends ServerSocket {
 
 // 2. Create that socket and make a logger that uses it.
 final server = LogsServer();
-final logger = BurtLogger(socket: server, device: Device.SUBSYSTEMS);
+final logger = BurtLogger(socket: server);
 
 void main() async {
   // 3. Initialize the socket and start sending messages
