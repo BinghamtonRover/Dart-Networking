@@ -21,7 +21,7 @@ abstract class ProtoSocket extends UdpSocket {
     onWrapper(wrapper, source);
   }
 
-  /// Sends an already-wrapped [WrappedMessage] to the [destination], or the given [socketOverride].
+  /// Sends an already-wrapped [WrappedMessage] to the [destination], or the given [destinationOverride].
   /// 
   /// Use this function instead of [sendMessage] if you need to manually wrap a message yourself.
   void sendWrapper(WrappedMessage wrapper, {SocketInfo? destinationOverride}) =>

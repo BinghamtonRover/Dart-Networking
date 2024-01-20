@@ -2,10 +2,10 @@
 import "package:meta/meta.dart";
 import "package:burt_network/generated.dart";
 
-import "rover_protocol.dart";
+import "burt_protocol.dart";
 import "socket_info.dart";
 
-mixin RoverHeartbeats on RoverUdpProtocol {
+mixin RoverHeartbeats on BurtUdpProtocol {
   /// Whether this socket received a heartbeat since the last call to [checkHeartbeats].
   bool didReceivedHeartbeat = false;
 

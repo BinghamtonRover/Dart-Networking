@@ -50,7 +50,7 @@ void main() => group("ProtoSocket:", () {
   });
 });
 
-class TestServer extends RoverUdpProtocol with RoverHeartbeats {
+class TestServer extends BurtUdpProtocol with RoverHeartbeats {
   ScienceData? data;
   bool onConnectCalled = false;
   bool onDisconnectCalled = false;
@@ -73,7 +73,7 @@ class TestServer extends RoverUdpProtocol with RoverHeartbeats {
   }
 }
 
-class TestClient extends RoverUdpProtocol {
+class TestClient extends BurtUdpProtocol {
   @override
   Duration get heartbeatInterval => const Duration(seconds: 1);
   

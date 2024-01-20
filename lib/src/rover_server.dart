@@ -3,11 +3,11 @@ import "package:meta/meta.dart";
 import "package:burt_network/generated.dart";
 
 import "rover_heartbeats.dart";
-import "rover_protocol.dart";
+import "burt_protocol.dart";
 import "rover_logger.dart";
 import "socket_info.dart";
 
-abstract class RoverServer extends RoverUdpProtocol with RoverHeartbeats, RoverLogger {
+abstract class RoverServer extends BurtUdpProtocol with RoverHeartbeats, RoverLogger {
   RoverServer({
     required super.port, 
     required super.device,

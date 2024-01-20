@@ -6,14 +6,14 @@ import "dart:async";
 import "proto_socket.dart";
 import "socket_info.dart";
 
-abstract class RoverUdpProtocol extends ProtoSocket {
+abstract class BurtUdpProtocol extends ProtoSocket {
   /// A timer to call [checkHeartbeats] every [heartbeatInterval].
   Timer? heartbeatTimer;
 
   /// How often to check for heartbeats.
   Duration get heartbeatInterval;
 
-  RoverUdpProtocol({
+  BurtUdpProtocol({
     required super.port, 
     required super.device, 
     super.quiet,

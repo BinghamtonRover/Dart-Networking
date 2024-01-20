@@ -1,8 +1,8 @@
 import "package:burt_network/generated.dart";
 
-import "rover_protocol.dart";
+import "burt_protocol.dart";
 
-mixin RoverLogger on RoverUdpProtocol {
+mixin RoverLogger on BurtUdpProtocol {
   /// A list of important logs that need to be sent when the dashboard connects.
   final List<BurtLog> _logBuffer = [];
 
