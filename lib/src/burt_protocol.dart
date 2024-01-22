@@ -45,5 +45,5 @@ abstract class BurtUdpProtocol extends ProtoSocket {
   bool get isConnected;
   void checkHeartbeats();
   void onHeartbeat(Connect heartbeat, SocketInfo source);
-  void onMessage(WrappedMessage message);
+  void onMessage(WrappedMessage wrapper);
 }

@@ -72,6 +72,7 @@ abstract class UdpSocket {
   Future<void> dispose() async {
     await _subscription?.cancel();
     _socket?.close();
+    destination = null;
     if (!quiet) logger.info("Closed the socket on port $port");
   }
 
