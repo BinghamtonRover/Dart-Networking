@@ -33,4 +33,7 @@ export "src/udp/rover_heartbeats.dart";
 export "src/udp/socket_info.dart";
 export "src/udp/udp_socket.dart";
 
+export "src/serial/device.dart";
+export "src/serial/firmware.dart";
+
 export "generated.dart";
