@@ -45,7 +45,7 @@ class BurtFirmwareSerial extends Service {
     }
 
     // Execute the handshake
-    if (!_reset()) logger.warning("The Teensy on port $port failed to reset");
+    if (!await _reset()) logger.warning("The Teensy on port $port failed to reset");
     if (!await _sendHandshake()) {
       logger.warning("Could not connect to Teensy", body: "Device on port $port failed the handshake");
       return false;
@@ -80,8 +80,9 @@ class BurtFirmwareSerial extends Service {
   }
 
   /// Sends the reset code and returns whether the device confirmed its reset.
-  bool _reset() {
+  Future<bool> _reset() async {
     _serial?.write(resetCode);
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     final response = _serial?.readBytes( 4);
     if (response == null) return false;
     if (response.length != 4 || response.any((x) => x != 1)) return false;
@@ -95,7 +96,7 @@ class BurtFirmwareSerial extends Service {
   /// Resets the device and closes the port.
   @override
   Future<void> dispose() async {
-    if (!_reset()) logger.warning("The $device device on port $port did not reset");
+    if (!await _reset()) logger.warning("The $device device on port $port did not reset");
     await _serial?.dispose();
   }
 }
