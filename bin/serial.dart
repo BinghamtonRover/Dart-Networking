@@ -6,6 +6,8 @@ final logger = BurtLogger();
 
 bool ascii = false;
 
+final s = Stopwatch();
+
 Future<void> listenToDevice(String port) async {
   logger.info("Connecting to $port...");
 	final device = SerialDevice(
@@ -20,6 +22,9 @@ Future<void> listenToDevice(String port) async {
 	logger.info("Connected. Listening...");
 	device.stream.listen(process);
 	device.startListening();
+	await Future<void>.delayed(Duration(seconds: 1));
+	device.write(Uint8List.fromList([0, 0, 0, 0]));
+	s.start();
 }
 
 Future<void> listenToFirmware(String port) async {
@@ -58,6 +63,10 @@ void main(List<String> args) async {
 }
 
 void process(Uint8List buffer) {
+	if (s.isRunning) {
+		print(s.elapsedMilliseconds);
+		s.stop();
+	}
 	if (ascii) {
 		final s = String.fromCharCodes(buffer).trim();
 		logger.debug("Got string: $s");	
