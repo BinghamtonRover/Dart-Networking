@@ -62,7 +62,11 @@ void process(Uint8List buffer) {
 		final s = String.fromCharCodes(buffer).trim();
 		logger.debug("Got string: $s");	
 	} else {
-		final data = DriveData.fromBuffer(buffer);
-		logger.debug("Got data: ${data.toProto3Json()}");
+		try {
+			final data = DriveData.fromBuffer(buffer);
+			logger.debug("Got data: ${data.toProto3Json()}");
+		} catch (error) {
+			logger.error("Could not decode DriveData: $error\n  Buffer: $buffer");
+		}
 	}
 }
