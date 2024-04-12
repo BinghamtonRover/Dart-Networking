@@ -9,7 +9,10 @@ class LogsServer extends RoverServer {
   void onMessage(_) { }
 
   @override
-  void restart() { }
+  Future<void> restart() async { }
+
+  @override
+  Future<void> onShutdown() async { }
 }
 
 // 2. Create that socket and make a logger that uses it.
