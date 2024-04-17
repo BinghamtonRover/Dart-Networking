@@ -35,5 +35,10 @@ export "src/udp/udp_socket.dart";
 
 export "src/serial/device.dart";
 export "src/serial/firmware.dart";
+export "src/serial/port_delegate.dart";
+export "src/serial/port_interface.dart";
+
+export "src/service.dart";
 
 export "generated.dart";
+export "logging.dart";

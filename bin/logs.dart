@@ -1,5 +1,4 @@
 import "package:burt_network/burt_network.dart";
-import "package:burt_network/logging.dart";
 
 // 1. Define a new socket on port 8001 that doesn't do anything
 class LogsServer extends RoverServer {

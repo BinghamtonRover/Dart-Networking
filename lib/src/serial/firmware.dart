@@ -1,90 +1,101 @@
-import "dart:async";
 import "dart:typed_data";
 
-import "package:burt_network/generated.dart";
 import "package:protobuf/protobuf.dart";
 
-import "device.dart";
+import "package:burt_network/burt_network.dart";
 
-String getDeviceDataName(Device? device) => switch (device) {
-  Device.ARM => ArmData().messageName,
-  Device.GRIPPER => GripperData().messageName,
-  Device.SCIENCE => ScienceData().messageName,
-  Device.DRIVE => DriveData().messageName,
-  Device.FIRMWARE => throw StateError("Device not identified when receiving packet"),
-  null => throw StateError("Null device when receiving packet"),
-  _ => throw ArgumentError("Unrecognized device: $device"),
-};
+/// Represents a firmware device connected over Serial.
+/// 
+/// This device starts with an unknown [device]. Calling [init] starts a handshake with the device
+/// that identifies it. If the handshake fails, [isReady] will be false. Calling [dispose] will
+/// reset the device and close the connection.
+class BurtFirmwareSerial extends Service {
+  /// The interval to read serial data at.
+  static const readInterval = Duration(milliseconds: 100);
+  /// How long it should take for a firmware device to respond to a handshake.
+  static const handshakeDelay = Duration(milliseconds: 200);
+  /// The reset code to send to a firmware device.
+  static final resetCode = Uint8List.fromList([0, 0, 0, 0]);
 
-class BurtFirmware {
-  final SerialDeviceInterface _serial;
-  final Device _sender;
-  BurtFirmware(this._serial, this._sender);
+  /// The name of this device.
+  Device device = Device.FIRMWARE;
 
-  StreamSubscription<Uint8List>? _subscription;
-  final _controller = StreamController<WrappedMessage>();
+  SerialDevice? _serial;
 
-  Device? device = Device.FIRMWARE;
-  bool get isConnected => device == null;
-  
-  Future<bool> connect() async {
-    await _serial.open();
-    await disconnect();
-    if (!await sendHandshake()) return false;
-    _serial.startListening();
-    _subscription = _serial.stream.listen(
-      (data) => _controller.add(
-        WrappedMessage(
-          name: getDeviceDataName(device),
-          data: data,
-        ),
-      ),
-    );
-    return true;
-  }
+  /// The port this device is attached to.
+  final String port;
+  /// The logger to use.
+  final BurtLogger logger;
+  /// Creates a firmware device at the given serial port.
+  BurtFirmwareSerial({required this.port, required this.logger});
 
-  /// Sends the reset code and returns whether a valid response was received.
-  Future<bool> disconnect() async { 
-    const resetCode = [0, 0, 0, 0];
-    const resetDelay = Duration(milliseconds: 200);
-    _serial.write(resetCode);
-    await Future<void>.delayed(resetDelay);
-    final response = _serial.read(count: 4);
-    if (response.isEmpty) return false;
-    if (response.length != 4) return false;
-    if (response.any((x) => x != 1)) return false;
-    device = null;
-    await _subscription?.cancel();
-    return true;
-  }
+  /// The stream of incoming data.
+  Stream<Uint8List>? get stream => _serial?.stream;
 
-  /// Sends a handshake and returns whether the firmware identified itself properly.
-  Future<bool> sendHandshake() async {
-    const handshakeDelay = Duration(milliseconds: 200);
-    final handshake = Connect(sender: _sender, receiver: Device.FIRMWARE);
-    _serial.write(handshake.writeToBuffer());
-    await Future<void>.delayed(handshakeDelay);
-    final response = _serial.read(count: 4);
-    if (response.isEmpty) return false;
-    final Connect message;
-    try {
-      message = Connect.fromBuffer(response);
-    } on InvalidProtocolBufferException {
+  /// Whether this device has passed the handshake.
+	bool get isReady => device != Device.FIRMWARE;
+
+  @override
+  Future<bool> init() async {
+    // Open the port
+    _serial = SerialDevice(portName: port, readInterval: readInterval, logger: logger);
+    if (!await _serial!.init()) {
+      logger.warning("Could not open firmware device on port $port");
       return false;
     }
-    if (message.receiver != _sender) return false;
-    device = message.sender;
+
+    // Execute the handshake
+    if (!_reset()) logger.warning("The Teensy on port $port failed to reset");
+    if (!await _sendHandshake()) {
+      logger.warning("Could not connect to Teensy", body: "Device on port $port failed the handshake");
+      return false;
+    }
+
+    logger.info("Connected to the ${device.name} Teensy on port $port");
+    _serial!.startListening();
     return true;
   }
 
-  Future<void> dispose() async {
-    await disconnect();
-    _serial.stopListening();
-    await _subscription?.cancel();
-    await _controller.close();
-    await _serial.dispose();
+  /// Sends the handshake to the device and returns whether it was successful.
+  Future<bool> _sendHandshake() async {
+    logger.debug("Sending handshake to port $port...");
+    final handshake = Connect(sender: Device.SUBSYSTEMS, receiver: Device.FIRMWARE); 
+    _serial!.write(handshake.writeToBuffer());
+    await Future<void>.delayed(handshakeDelay);
+    final response = _serial!.readBytes(4);
+    if (response.isEmpty) {
+      logger.trace("Device did not respond");
+      return false;
+    }
+    try {
+      final message = Connect.fromBuffer(response);
+      logger.trace("Device responded with: ${message.toProto3Json()}");
+      if (message.receiver != Device.SUBSYSTEMS) return false;
+      device = message.sender;
+      return true;
+    } on InvalidProtocolBufferException {
+      logger.trace("Device responded with malformed data: $response");
+      return false;
+    }
   }
 
-  Stream<WrappedMessage> get messages => _controller.stream;
-  void sendMessage(Message message) => _serial.write(message.writeToBuffer());
+  /// Sends the reset code and returns whether the device confirmed its reset.
+  bool _reset() {
+    _serial?.write(resetCode);
+    final response = _serial?.readBytes( 4);
+    if (response == null) return false;
+    if (response.length != 4 || response.any((x) => x != 1)) return false;
+    logger.info("The ${device.name} Teensy has been reset");
+    return true;
+  }
+
+  /// Sends bytes to the device via Serial.
+  void sendBytes(List<int> bytes) => _serial?.write(Uint8List.fromList(bytes));
+
+  /// Resets the device and closes the port.
+  @override
+  Future<void> dispose() async {
+    if (!_reset()) logger.warning("The $device device on port $port did not reset");
+    await _serial?.dispose();
+  }
 }
