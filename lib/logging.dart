@@ -26,7 +26,7 @@ class BurtLogger {
   /// socket connects, the messages will send to the connected device (ie, the Dashboard).
   /// 
   /// If the device is already connected, all messages are sent to it immediately.
-  final RoverServer? socket;
+  RoverServer? socket;
 
   /// Creates a logger capable of sending network messages over the given socket.
   BurtLogger({this.socket}) : device = socket?.device;
