@@ -84,8 +84,9 @@ class BurtFirmwareSerial extends Service {
     _serial?.write(resetCode);
     await Future<void>.delayed(const Duration(milliseconds: 100));
     final response = _serial?.readBytes();
+    // The response should end with [1, 1, 1, 1], but may have elements before that
     if (response == null) return false;
-    if (response.isEmpty) return false;
+    if (response.length < 4) return false;
     if (response.sublist(response.length - 4).any((x) => x != 1)) return false;
     logger.info("The ${device.name} Teensy has been reset");
     return true;
