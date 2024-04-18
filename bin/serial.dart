@@ -32,7 +32,7 @@ Future<void> listenToFirmware(String port) async {
     logger.critical("Could not connect to $port");
     return;
   }
-	logger.info("Connected. Listening...");
+	logger.info("Connected? ${device.isReady}. Listening...");
 	device.stream?.listen(process);
 }
 
