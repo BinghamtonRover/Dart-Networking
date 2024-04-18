@@ -46,7 +46,6 @@ class BurtFirmwareSerial extends Service {
 
     // Execute the handshake
     if (!(await _reset() || await _reset())) logger.warning("The Teensy on port $port failed to reset");
-	print(_serial?.readBytes()?.toString());
     if (!await _sendHandshake()) {
       logger.warning("Could not connect to Teensy", body: "Device on port $port failed the handshake");
       return false;
