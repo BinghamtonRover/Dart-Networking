@@ -26,7 +26,7 @@ const Device$json = {
     {'1': 'ARM', '2': 6},
     {'1': 'GRIPPER', '2': 7},
     {'1': 'SCIENCE', '2': 8},
-    {'1': 'CONTROL', '2': 9},
+    {'1': 'DRIVE', '2': 9},
   ],
 };
 
@@ -34,7 +34,7 @@ const Device$json = {
 final $typed_data.Uint8List deviceDescriptor = $convert.base64Decode(
     'CgZEZXZpY2USFAoQREVWSUNFX1VOREVGSU5FRBAAEg0KCURBU0hCT0FSRBABEg4KClNVQlNZU1'
     'RFTVMQAhIJCgVWSURFTxADEgwKCEFVVE9OT01ZEAQSDAoIRklSTVdBUkUQBRIHCgNBUk0QBhIL'
-    'CgdHUklQUEVSEAcSCwoHU0NJRU5DRRAIEgsKB0NPTlRST0wQCQ==');
+    'CgdHUklQUEVSEAcSCwoHU0NJRU5DRRAIEgkKBURSSVZFEAk=');
 
 @$core.Deprecated('Use roverStatusDescriptor instead')
 const RoverStatus$json = {
