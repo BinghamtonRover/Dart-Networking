@@ -50,6 +50,11 @@ void main(List<String> args) async {
 		logger.info("Running in ASCII mode");
 		ascii = true;
 	}
+  if (args.contains("-f") || args.contains("--firmware")) {
+    await listenToFirmware(port);
+  } else {
+    await listenToDevice(port);
+  }
 }
 
 void process(Uint8List buffer) {
