@@ -17,6 +17,7 @@ import 'science.pbenum.dart';
 
 export 'science.pbenum.dart';
 
+/// / A command to the science subsystem.
 class ScienceCommand extends $pb.GeneratedMessage {
   factory ScienceCommand({
     $core.double? carouselMotor,
@@ -135,7 +136,7 @@ class ScienceCommand extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSubsurfaceMotor() => clearField(3);
 
-  /// Vacuum
+  /// Control over other hardware
   @$pb.TagNumber(4)
   PumpState get pumps => $_getN(3);
   @$pb.TagNumber(4)
@@ -210,6 +211,7 @@ class ScienceCommand extends $pb.GeneratedMessage {
   void clearState() => clearField(11);
 }
 
+/// / Data coming from the science subsystem.
 class ScienceData extends $pb.GeneratedMessage {
   factory ScienceData({
     $core.int? sample,
@@ -270,6 +272,7 @@ class ScienceData extends $pb.GeneratedMessage {
   static ScienceData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ScienceData>(create);
   static ScienceData? _defaultInstance;
 
+  /// High-level data
   @$pb.TagNumber(1)
   $core.int get sample => $_getIZ(0);
   @$pb.TagNumber(1)
@@ -288,6 +291,7 @@ class ScienceData extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearState() => clearField(2);
 
+  /// Sensor data
   @$pb.TagNumber(3)
   $core.double get co2 => $_getN(2);
   @$pb.TagNumber(3)
