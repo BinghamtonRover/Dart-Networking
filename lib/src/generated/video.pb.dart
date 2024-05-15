@@ -13,7 +13,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'version.pb.dart' as $0;
 import 'video.pbenum.dart';
 
 export 'video.pbenum.dart';
@@ -220,7 +219,6 @@ class VideoData extends $pb.GeneratedMessage {
     $core.String? id,
     CameraDetails? details,
     $core.List<$core.int>? frame,
-    $0.Version? version,
   }) {
     final $result = create();
     if (id != null) {
@@ -232,9 +230,6 @@ class VideoData extends $pb.GeneratedMessage {
     if (frame != null) {
       $result.frame = frame;
     }
-    if (version != null) {
-      $result.version = version;
-    }
     return $result;
   }
   VideoData._() : super();
@@ -245,7 +240,6 @@ class VideoData extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<CameraDetails>(2, _omitFieldNames ? '' : 'details', subBuilder: CameraDetails.create)
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'frame', $pb.PbFieldType.OY)
-    ..aOM<$0.Version>(4, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
     ..hasRequiredFields = false
   ;
 
@@ -301,17 +295,6 @@ class VideoData extends $pb.GeneratedMessage {
   $core.bool hasFrame() => $_has(2);
   @$pb.TagNumber(3)
   void clearFrame() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $0.Version get version => $_getN(3);
-  @$pb.TagNumber(4)
-  set version($0.Version v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasVersion() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearVersion() => clearField(4);
-  @$pb.TagNumber(4)
-  $0.Version ensureVersion() => $_ensure(3);
 }
 
 /// / Make changes to a camera feed.
@@ -319,7 +302,6 @@ class VideoCommand extends $pb.GeneratedMessage {
   factory VideoCommand({
     $core.String? id,
     CameraDetails? details,
-    $0.Version? version,
   }) {
     final $result = create();
     if (id != null) {
@@ -327,9 +309,6 @@ class VideoCommand extends $pb.GeneratedMessage {
     }
     if (details != null) {
       $result.details = details;
-    }
-    if (version != null) {
-      $result.version = version;
     }
     return $result;
   }
@@ -340,7 +319,6 @@ class VideoCommand extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VideoCommand', createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<CameraDetails>(2, _omitFieldNames ? '' : 'details', subBuilder: CameraDetails.create)
-    ..aOM<$0.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
     ..hasRequiredFields = false
   ;
 
@@ -388,17 +366,6 @@ class VideoCommand extends $pb.GeneratedMessage {
   void clearDetails() => clearField(2);
   @$pb.TagNumber(2)
   CameraDetails ensureDetails() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $0.Version get version => $_getN(2);
-  @$pb.TagNumber(3)
-  set version($0.Version v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasVersion() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearVersion() => clearField(3);
-  @$pb.TagNumber(3)
-  $0.Version ensureVersion() => $_ensure(2);
 }
 
 

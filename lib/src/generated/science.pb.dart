@@ -14,47 +14,58 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'science.pbenum.dart';
-import 'version.pb.dart' as $0;
 
 export 'science.pbenum.dart';
 
-/// / A command to the science subsystem.
 class ScienceCommand extends $pb.GeneratedMessage {
   factory ScienceCommand({
-    $core.double? carouselMotor,
-    $core.double? scoopMotor,
-    $core.double? subsurfaceMotor,
-    PumpState? pumps,
-    ServoState? funnel,
-    ServoState? scoop,
-    CarouselCommand? carousel,
+    $core.double? dirtCarousel,
+    $core.double? dirtLinear,
+    $core.double? scienceLinear,
+    $core.double? vacuumLinear,
+    PumpState? vacuum,
+    DirtReleaseState? dirtRelease,
+    PumpState? pump1,
+    PumpState? pump2,
+    PumpState? pump3,
+    PumpState? pump4,
     $core.bool? calibrate,
     $core.bool? stop,
+    $core.bool? nextTube,
+    $core.bool? nextSection,
     $core.int? sample,
     ScienceState? state,
-    $0.Version? version,
   }) {
     final $result = create();
-    if (carouselMotor != null) {
-      $result.carouselMotor = carouselMotor;
+    if (dirtCarousel != null) {
+      $result.dirtCarousel = dirtCarousel;
     }
-    if (scoopMotor != null) {
-      $result.scoopMotor = scoopMotor;
+    if (dirtLinear != null) {
+      $result.dirtLinear = dirtLinear;
     }
-    if (subsurfaceMotor != null) {
-      $result.subsurfaceMotor = subsurfaceMotor;
+    if (scienceLinear != null) {
+      $result.scienceLinear = scienceLinear;
     }
-    if (pumps != null) {
-      $result.pumps = pumps;
+    if (vacuumLinear != null) {
+      $result.vacuumLinear = vacuumLinear;
     }
-    if (funnel != null) {
-      $result.funnel = funnel;
+    if (vacuum != null) {
+      $result.vacuum = vacuum;
     }
-    if (scoop != null) {
-      $result.scoop = scoop;
+    if (dirtRelease != null) {
+      $result.dirtRelease = dirtRelease;
     }
-    if (carousel != null) {
-      $result.carousel = carousel;
+    if (pump1 != null) {
+      $result.pump1 = pump1;
+    }
+    if (pump2 != null) {
+      $result.pump2 = pump2;
+    }
+    if (pump3 != null) {
+      $result.pump3 = pump3;
+    }
+    if (pump4 != null) {
+      $result.pump4 = pump4;
     }
     if (calibrate != null) {
       $result.calibrate = calibrate;
@@ -62,14 +73,17 @@ class ScienceCommand extends $pb.GeneratedMessage {
     if (stop != null) {
       $result.stop = stop;
     }
+    if (nextTube != null) {
+      $result.nextTube = nextTube;
+    }
+    if (nextSection != null) {
+      $result.nextSection = nextSection;
+    }
     if (sample != null) {
       $result.sample = sample;
     }
     if (state != null) {
       $result.state = state;
-    }
-    if (version != null) {
-      $result.version = version;
     }
     return $result;
   }
@@ -78,18 +92,22 @@ class ScienceCommand extends $pb.GeneratedMessage {
   factory ScienceCommand.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScienceCommand', createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'carouselMotor', $pb.PbFieldType.OF)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'scoopMotor', $pb.PbFieldType.OF)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'subsurfaceMotor', $pb.PbFieldType.OF)
-    ..e<PumpState>(4, _omitFieldNames ? '' : 'pumps', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
-    ..e<ServoState>(5, _omitFieldNames ? '' : 'funnel', $pb.PbFieldType.OE, defaultOrMaker: ServoState.SERVO_STATE_UNDEFINED, valueOf: ServoState.valueOf, enumValues: ServoState.values)
-    ..e<ServoState>(6, _omitFieldNames ? '' : 'scoop', $pb.PbFieldType.OE, defaultOrMaker: ServoState.SERVO_STATE_UNDEFINED, valueOf: ServoState.valueOf, enumValues: ServoState.values)
-    ..e<CarouselCommand>(7, _omitFieldNames ? '' : 'carousel', $pb.PbFieldType.OE, defaultOrMaker: CarouselCommand.CAROUSEL_COMMAND_UNDEFINED, valueOf: CarouselCommand.valueOf, enumValues: CarouselCommand.values)
-    ..aOB(8, _omitFieldNames ? '' : 'calibrate')
-    ..aOB(9, _omitFieldNames ? '' : 'stop')
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'sample', $pb.PbFieldType.O3)
-    ..e<ScienceState>(11, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ScienceState.SCIENCE_STATE_UNDEFINED, valueOf: ScienceState.valueOf, enumValues: ScienceState.values)
-    ..aOM<$0.Version>(12, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'dirtCarousel', $pb.PbFieldType.OF)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'dirtLinear', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'scienceLinear', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'vacuumLinear', $pb.PbFieldType.OF)
+    ..e<PumpState>(5, _omitFieldNames ? '' : 'vacuum', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
+    ..e<DirtReleaseState>(7, _omitFieldNames ? '' : 'dirtRelease', $pb.PbFieldType.OE, protoName: 'dirtRelease', defaultOrMaker: DirtReleaseState.DIRT_RELEASE_STATE_UNDEFINED, valueOf: DirtReleaseState.valueOf, enumValues: DirtReleaseState.values)
+    ..e<PumpState>(8, _omitFieldNames ? '' : 'pump1', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
+    ..e<PumpState>(9, _omitFieldNames ? '' : 'pump2', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
+    ..e<PumpState>(10, _omitFieldNames ? '' : 'pump3', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
+    ..e<PumpState>(11, _omitFieldNames ? '' : 'pump4', $pb.PbFieldType.OE, defaultOrMaker: PumpState.PUMP_STATE_UNDEFINED, valueOf: PumpState.valueOf, enumValues: PumpState.values)
+    ..aOB(12, _omitFieldNames ? '' : 'calibrate')
+    ..aOB(13, _omitFieldNames ? '' : 'stop')
+    ..aOB(14, _omitFieldNames ? '' : 'nextTube')
+    ..aOB(15, _omitFieldNames ? '' : 'nextSection')
+    ..a<$core.int>(16, _omitFieldNames ? '' : 'sample', $pb.PbFieldType.O3)
+    ..e<ScienceState>(17, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ScienceState.SCIENCE_STATE_UNDEFINED, valueOf: ScienceState.valueOf, enumValues: ScienceState.values)
     ..hasRequiredFields = false
   ;
 
@@ -116,146 +134,184 @@ class ScienceCommand extends $pb.GeneratedMessage {
 
   /// Individual control over each motor. Indicates steps to move
   @$pb.TagNumber(1)
-  $core.double get carouselMotor => $_getN(0);
+  $core.double get dirtCarousel => $_getN(0);
   @$pb.TagNumber(1)
-  set carouselMotor($core.double v) { $_setFloat(0, v); }
+  set dirtCarousel($core.double v) { $_setFloat(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCarouselMotor() => $_has(0);
+  $core.bool hasDirtCarousel() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCarouselMotor() => clearField(1);
+  void clearDirtCarousel() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.double get scoopMotor => $_getN(1);
+  $core.double get dirtLinear => $_getN(1);
   @$pb.TagNumber(2)
-  set scoopMotor($core.double v) { $_setFloat(1, v); }
+  set dirtLinear($core.double v) { $_setFloat(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasScoopMotor() => $_has(1);
+  $core.bool hasDirtLinear() => $_has(1);
   @$pb.TagNumber(2)
-  void clearScoopMotor() => clearField(2);
+  void clearDirtLinear() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.double get subsurfaceMotor => $_getN(2);
+  $core.double get scienceLinear => $_getN(2);
   @$pb.TagNumber(3)
-  set subsurfaceMotor($core.double v) { $_setFloat(2, v); }
+  set scienceLinear($core.double v) { $_setFloat(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasSubsurfaceMotor() => $_has(2);
+  $core.bool hasScienceLinear() => $_has(2);
   @$pb.TagNumber(3)
-  void clearSubsurfaceMotor() => clearField(3);
+  void clearScienceLinear() => clearField(3);
 
-  /// Control over other hardware
   @$pb.TagNumber(4)
-  PumpState get pumps => $_getN(3);
+  $core.double get vacuumLinear => $_getN(3);
   @$pb.TagNumber(4)
-  set pumps(PumpState v) { setField(4, v); }
+  set vacuumLinear($core.double v) { $_setFloat(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasPumps() => $_has(3);
+  $core.bool hasVacuumLinear() => $_has(3);
   @$pb.TagNumber(4)
-  void clearPumps() => clearField(4);
+  void clearVacuumLinear() => clearField(4);
 
+  /// Vacuum
   @$pb.TagNumber(5)
-  ServoState get funnel => $_getN(4);
+  PumpState get vacuum => $_getN(4);
   @$pb.TagNumber(5)
-  set funnel(ServoState v) { setField(5, v); }
+  set vacuum(PumpState v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasFunnel() => $_has(4);
+  $core.bool hasVacuum() => $_has(4);
   @$pb.TagNumber(5)
-  void clearFunnel() => clearField(5);
-
-  @$pb.TagNumber(6)
-  ServoState get scoop => $_getN(5);
-  @$pb.TagNumber(6)
-  set scoop(ServoState v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasScoop() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearScoop() => clearField(6);
+  void clearVacuum() => clearField(5);
 
   @$pb.TagNumber(7)
-  CarouselCommand get carousel => $_getN(6);
+  DirtReleaseState get dirtRelease => $_getN(5);
   @$pb.TagNumber(7)
-  set carousel(CarouselCommand v) { setField(7, v); }
+  set dirtRelease(DirtReleaseState v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCarousel() => $_has(6);
+  $core.bool hasDirtRelease() => $_has(5);
   @$pb.TagNumber(7)
-  void clearCarousel() => clearField(7);
+  void clearDirtRelease() => clearField(7);
+
+  /// Pumps
+  @$pb.TagNumber(8)
+  PumpState get pump1 => $_getN(6);
+  @$pb.TagNumber(8)
+  set pump1(PumpState v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasPump1() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearPump1() => clearField(8);
+
+  @$pb.TagNumber(9)
+  PumpState get pump2 => $_getN(7);
+  @$pb.TagNumber(9)
+  set pump2(PumpState v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasPump2() => $_has(7);
+  @$pb.TagNumber(9)
+  void clearPump2() => clearField(9);
+
+  @$pb.TagNumber(10)
+  PumpState get pump3 => $_getN(8);
+  @$pb.TagNumber(10)
+  set pump3(PumpState v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasPump3() => $_has(8);
+  @$pb.TagNumber(10)
+  void clearPump3() => clearField(10);
+
+  @$pb.TagNumber(11)
+  PumpState get pump4 => $_getN(9);
+  @$pb.TagNumber(11)
+  set pump4(PumpState v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasPump4() => $_has(9);
+  @$pb.TagNumber(11)
+  void clearPump4() => clearField(11);
 
   /// High level commands
-  @$pb.TagNumber(8)
-  $core.bool get calibrate => $_getBF(7);
-  @$pb.TagNumber(8)
-  set calibrate($core.bool v) { $_setBool(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasCalibrate() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearCalibrate() => clearField(8);
+  @$pb.TagNumber(12)
+  $core.bool get calibrate => $_getBF(10);
+  @$pb.TagNumber(12)
+  set calibrate($core.bool v) { $_setBool(10, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasCalibrate() => $_has(10);
+  @$pb.TagNumber(12)
+  void clearCalibrate() => clearField(12);
 
-  @$pb.TagNumber(9)
-  $core.bool get stop => $_getBF(8);
-  @$pb.TagNumber(9)
-  set stop($core.bool v) { $_setBool(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasStop() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearStop() => clearField(9);
+  @$pb.TagNumber(13)
+  $core.bool get stop => $_getBF(11);
+  @$pb.TagNumber(13)
+  set stop($core.bool v) { $_setBool(11, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasStop() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearStop() => clearField(13);
 
-  @$pb.TagNumber(10)
-  $core.int get sample => $_getIZ(9);
-  @$pb.TagNumber(10)
-  set sample($core.int v) { $_setSignedInt32(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasSample() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearSample() => clearField(10);
+  @$pb.TagNumber(14)
+  $core.bool get nextTube => $_getBF(12);
+  @$pb.TagNumber(14)
+  set nextTube($core.bool v) { $_setBool(12, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasNextTube() => $_has(12);
+  @$pb.TagNumber(14)
+  void clearNextTube() => clearField(14);
 
-  @$pb.TagNumber(11)
-  ScienceState get state => $_getN(10);
-  @$pb.TagNumber(11)
-  set state(ScienceState v) { setField(11, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasState() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearState() => clearField(11);
+  @$pb.TagNumber(15)
+  $core.bool get nextSection => $_getBF(13);
+  @$pb.TagNumber(15)
+  set nextSection($core.bool v) { $_setBool(13, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasNextSection() => $_has(13);
+  @$pb.TagNumber(15)
+  void clearNextSection() => clearField(15);
 
-  @$pb.TagNumber(12)
-  $0.Version get version => $_getN(11);
-  @$pb.TagNumber(12)
-  set version($0.Version v) { setField(12, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasVersion() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearVersion() => clearField(12);
-  @$pb.TagNumber(12)
-  $0.Version ensureVersion() => $_ensure(11);
+  @$pb.TagNumber(16)
+  $core.int get sample => $_getIZ(14);
+  @$pb.TagNumber(16)
+  set sample($core.int v) { $_setSignedInt32(14, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasSample() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearSample() => clearField(16);
+
+  @$pb.TagNumber(17)
+  ScienceState get state => $_getN(15);
+  @$pb.TagNumber(17)
+  set state(ScienceState v) { setField(17, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasState() => $_has(15);
+  @$pb.TagNumber(17)
+  void clearState() => clearField(17);
 }
 
-/// / Data coming from the science subsystem.
 class ScienceData extends $pb.GeneratedMessage {
   factory ScienceData({
-    $core.int? sample,
-    ScienceState? state,
     $core.double? co2,
     $core.double? humidity,
+    $core.double? methane,
+    $core.double? pH,
     $core.double? temperature,
-    $0.Version? version,
+    $core.int? sample,
+    ScienceState? state,
   }) {
     final $result = create();
-    if (sample != null) {
-      $result.sample = sample;
-    }
-    if (state != null) {
-      $result.state = state;
-    }
     if (co2 != null) {
       $result.co2 = co2;
     }
     if (humidity != null) {
       $result.humidity = humidity;
     }
+    if (methane != null) {
+      $result.methane = methane;
+    }
+    if (pH != null) {
+      $result.pH = pH;
+    }
     if (temperature != null) {
       $result.temperature = temperature;
     }
-    if (version != null) {
-      $result.version = version;
+    if (sample != null) {
+      $result.sample = sample;
+    }
+    if (state != null) {
+      $result.state = state;
     }
     return $result;
   }
@@ -264,12 +320,13 @@ class ScienceData extends $pb.GeneratedMessage {
   factory ScienceData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScienceData', createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'sample', $pb.PbFieldType.O3)
-    ..e<ScienceState>(2, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ScienceState.SCIENCE_STATE_UNDEFINED, valueOf: ScienceState.valueOf, enumValues: ScienceState.values)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'co2', $pb.PbFieldType.OF)
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'humidity', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'co2', $pb.PbFieldType.OF)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'humidity', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'methane', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'pH', $pb.PbFieldType.OF, protoName: 'pH')
     ..a<$core.double>(5, _omitFieldNames ? '' : 'temperature', $pb.PbFieldType.OF)
-    ..aOM<$0.Version>(6, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'sample', $pb.PbFieldType.O3)
+    ..e<ScienceState>(7, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ScienceState.SCIENCE_STATE_UNDEFINED, valueOf: ScienceState.valueOf, enumValues: ScienceState.values)
     ..hasRequiredFields = false
   ;
 
@@ -294,43 +351,41 @@ class ScienceData extends $pb.GeneratedMessage {
   static ScienceData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ScienceData>(create);
   static ScienceData? _defaultInstance;
 
-  /// High-level data
   @$pb.TagNumber(1)
-  $core.int get sample => $_getIZ(0);
+  $core.double get co2 => $_getN(0);
   @$pb.TagNumber(1)
-  set sample($core.int v) { $_setSignedInt32(0, v); }
+  set co2($core.double v) { $_setFloat(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSample() => $_has(0);
+  $core.bool hasCo2() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSample() => clearField(1);
+  void clearCo2() => clearField(1);
 
   @$pb.TagNumber(2)
-  ScienceState get state => $_getN(1);
+  $core.double get humidity => $_getN(1);
   @$pb.TagNumber(2)
-  set state(ScienceState v) { setField(2, v); }
+  set humidity($core.double v) { $_setFloat(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasState() => $_has(1);
+  $core.bool hasHumidity() => $_has(1);
   @$pb.TagNumber(2)
-  void clearState() => clearField(2);
+  void clearHumidity() => clearField(2);
 
-  /// Sensor data
   @$pb.TagNumber(3)
-  $core.double get co2 => $_getN(2);
+  $core.double get methane => $_getN(2);
   @$pb.TagNumber(3)
-  set co2($core.double v) { $_setFloat(2, v); }
+  set methane($core.double v) { $_setFloat(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCo2() => $_has(2);
+  $core.bool hasMethane() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCo2() => clearField(3);
+  void clearMethane() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get humidity => $_getN(3);
+  $core.double get pH => $_getN(3);
   @$pb.TagNumber(4)
-  set humidity($core.double v) { $_setFloat(3, v); }
+  set pH($core.double v) { $_setFloat(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasHumidity() => $_has(3);
+  $core.bool hasPH() => $_has(3);
   @$pb.TagNumber(4)
-  void clearHumidity() => clearField(4);
+  void clearPH() => clearField(4);
 
   @$pb.TagNumber(5)
   $core.double get temperature => $_getN(4);
@@ -342,15 +397,22 @@ class ScienceData extends $pb.GeneratedMessage {
   void clearTemperature() => clearField(5);
 
   @$pb.TagNumber(6)
-  $0.Version get version => $_getN(5);
+  $core.int get sample => $_getIZ(5);
   @$pb.TagNumber(6)
-  set version($0.Version v) { setField(6, v); }
+  set sample($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasVersion() => $_has(5);
+  $core.bool hasSample() => $_has(5);
   @$pb.TagNumber(6)
-  void clearVersion() => clearField(6);
-  @$pb.TagNumber(6)
-  $0.Version ensureVersion() => $_ensure(5);
+  void clearSample() => clearField(6);
+
+  @$pb.TagNumber(7)
+  ScienceState get state => $_getN(6);
+  @$pb.TagNumber(7)
+  set state(ScienceState v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasState() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearState() => clearField(7);
 }
 
 

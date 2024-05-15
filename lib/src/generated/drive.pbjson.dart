@@ -28,7 +28,6 @@ const DriveCommand$json = {
     {'1': 'rear_swivel', '3': 9, '4': 1, '5': 2, '10': 'rearSwivel'},
     {'1': 'rear_tilt', '3': 10, '4': 1, '5': 2, '10': 'rearTilt'},
     {'1': 'status', '3': 11, '4': 1, '5': 14, '6': '.RoverStatus', '10': 'status'},
-    {'1': 'version', '3': 12, '4': 1, '5': 11, '6': '.Version', '10': 'version'},
   ],
 };
 
@@ -40,7 +39,7 @@ final $typed_data.Uint8List driveCommandDescriptor = $convert.base64Decode(
     'RUaHJvdHRsZRIhCgxmcm9udF9zd2l2ZWwYByABKAJSC2Zyb250U3dpdmVsEh0KCmZyb250X3Rp'
     'bHQYCCABKAJSCWZyb250VGlsdBIfCgtyZWFyX3N3aXZlbBgJIAEoAlIKcmVhclN3aXZlbBIbCg'
     'lyZWFyX3RpbHQYCiABKAJSCHJlYXJUaWx0EiQKBnN0YXR1cxgLIAEoDjIMLlJvdmVyU3RhdHVz'
-    'UgZzdGF0dXMSIgoHdmVyc2lvbhgMIAEoCzIILlZlcnNpb25SB3ZlcnNpb24=');
+    'UgZzdGF0dXM=');
 
 @$core.Deprecated('Use driveDataDescriptor instead')
 const DriveData$json = {
@@ -59,7 +58,12 @@ const DriveData$json = {
     {'1': 'battery_voltage', '3': 11, '4': 1, '5': 2, '10': 'batteryVoltage'},
     {'1': 'battery_current', '3': 12, '4': 1, '5': 2, '10': 'batteryCurrent'},
     {'1': 'battery_temperature', '3': 13, '4': 1, '5': 2, '10': 'batteryTemperature'},
-    {'1': 'version', '3': 14, '4': 1, '5': 11, '6': '.Version', '10': 'version'},
+    {'1': 'back_left', '3': 14, '4': 1, '5': 2, '10': 'backLeft'},
+    {'1': 'middle_left', '3': 15, '4': 1, '5': 2, '10': 'middleLeft'},
+    {'1': 'front_left', '3': 16, '4': 1, '5': 2, '10': 'frontLeft'},
+    {'1': 'back_right', '3': 17, '4': 1, '5': 2, '10': 'backRight'},
+    {'1': 'middle_right', '3': 18, '4': 1, '5': 2, '10': 'middleRight'},
+    {'1': 'front_right', '3': 19, '4': 1, '5': 2, '10': 'frontRight'},
   ],
 };
 
@@ -72,6 +76,9 @@ final $typed_data.Uint8List driveDataDescriptor = $convert.base64Decode(
     'CCABKAJSCWZyb250VGlsdBIfCgtyZWFyX3N3aXZlbBgJIAEoAlIKcmVhclN3aXZlbBIbCglyZW'
     'FyX3RpbHQYCiABKAJSCHJlYXJUaWx0EicKD2JhdHRlcnlfdm9sdGFnZRgLIAEoAlIOYmF0dGVy'
     'eVZvbHRhZ2USJwoPYmF0dGVyeV9jdXJyZW50GAwgASgCUg5iYXR0ZXJ5Q3VycmVudBIvChNiYX'
-    'R0ZXJ5X3RlbXBlcmF0dXJlGA0gASgCUhJiYXR0ZXJ5VGVtcGVyYXR1cmUSIgoHdmVyc2lvbhgO'
-    'IAEoCzIILlZlcnNpb25SB3ZlcnNpb24=');
+    'R0ZXJ5X3RlbXBlcmF0dXJlGA0gASgCUhJiYXR0ZXJ5VGVtcGVyYXR1cmUSGwoJYmFja19sZWZ0'
+    'GA4gASgCUghiYWNrTGVmdBIfCgttaWRkbGVfbGVmdBgPIAEoAlIKbWlkZGxlTGVmdBIdCgpmcm'
+    '9udF9sZWZ0GBAgASgCUglmcm9udExlZnQSHQoKYmFja19yaWdodBgRIAEoAlIJYmFja1JpZ2h0'
+    'EiEKDG1pZGRsZV9yaWdodBgSIAEoAlILbWlkZGxlUmlnaHQSHwoLZnJvbnRfcmlnaHQYEyABKA'
+    'JSCmZyb250UmlnaHQ=');
 
