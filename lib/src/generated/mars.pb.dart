@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'gps.pb.dart' as $0;
+import 'gps.pb.dart' as $1;
 import 'mars.pbenum.dart';
 
 export 'mars.pbenum.dart';
@@ -22,8 +22,8 @@ class MarsCommand extends $pb.GeneratedMessage {
   factory MarsCommand({
     $core.double? swivel,
     $core.double? tilt,
-    $0.GpsCoordinates? rover,
-    $0.GpsCoordinates? baseStationOverride,
+    $1.GpsCoordinates? rover,
+    $1.GpsCoordinates? baseStationOverride,
   }) {
     final $result = create();
     if (swivel != null) {
@@ -47,8 +47,8 @@ class MarsCommand extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarsCommand', createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'swivel', $pb.PbFieldType.OF)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'tilt', $pb.PbFieldType.OF)
-    ..aOM<$0.GpsCoordinates>(3, _omitFieldNames ? '' : 'rover', subBuilder: $0.GpsCoordinates.create)
-    ..aOM<$0.GpsCoordinates>(4, _omitFieldNames ? '' : 'baseStationOverride', protoName: 'baseStationOverride', subBuilder: $0.GpsCoordinates.create)
+    ..aOM<$1.GpsCoordinates>(3, _omitFieldNames ? '' : 'rover', subBuilder: $1.GpsCoordinates.create)
+    ..aOM<$1.GpsCoordinates>(4, _omitFieldNames ? '' : 'baseStationOverride', protoName: 'baseStationOverride', subBuilder: $1.GpsCoordinates.create)
     ..hasRequiredFields = false
   ;
 
@@ -94,33 +94,33 @@ class MarsCommand extends $pb.GeneratedMessage {
 
   /// Automatic control
   @$pb.TagNumber(3)
-  $0.GpsCoordinates get rover => $_getN(2);
+  $1.GpsCoordinates get rover => $_getN(2);
   @$pb.TagNumber(3)
-  set rover($0.GpsCoordinates v) { setField(3, v); }
+  set rover($1.GpsCoordinates v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRover() => $_has(2);
   @$pb.TagNumber(3)
   void clearRover() => clearField(3);
   @$pb.TagNumber(3)
-  $0.GpsCoordinates ensureRover() => $_ensure(2);
+  $1.GpsCoordinates ensureRover() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $0.GpsCoordinates get baseStationOverride => $_getN(3);
+  $1.GpsCoordinates get baseStationOverride => $_getN(3);
   @$pb.TagNumber(4)
-  set baseStationOverride($0.GpsCoordinates v) { setField(4, v); }
+  set baseStationOverride($1.GpsCoordinates v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasBaseStationOverride() => $_has(3);
   @$pb.TagNumber(4)
   void clearBaseStationOverride() => clearField(4);
   @$pb.TagNumber(4)
-  $0.GpsCoordinates ensureBaseStationOverride() => $_ensure(3);
+  $1.GpsCoordinates ensureBaseStationOverride() => $_ensure(3);
 }
 
 class MarsData extends $pb.GeneratedMessage {
   factory MarsData({
     $core.double? swivel,
     $core.double? tilt,
-    $0.GpsCoordinates? coordinates,
+    $1.GpsCoordinates? coordinates,
     MarsStatus? status,
   }) {
     final $result = create();
@@ -145,7 +145,7 @@ class MarsData extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarsData', createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'swivel', $pb.PbFieldType.OF)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'tilt', $pb.PbFieldType.OF)
-    ..aOM<$0.GpsCoordinates>(3, _omitFieldNames ? '' : 'coordinates', subBuilder: $0.GpsCoordinates.create)
+    ..aOM<$1.GpsCoordinates>(3, _omitFieldNames ? '' : 'coordinates', subBuilder: $1.GpsCoordinates.create)
     ..e<MarsStatus>(4, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: MarsStatus.MARS_STATUS_UNDEFINED, valueOf: MarsStatus.valueOf, enumValues: MarsStatus.values)
     ..hasRequiredFields = false
   ;
@@ -190,15 +190,15 @@ class MarsData extends $pb.GeneratedMessage {
   void clearTilt() => clearField(2);
 
   @$pb.TagNumber(3)
-  $0.GpsCoordinates get coordinates => $_getN(2);
+  $1.GpsCoordinates get coordinates => $_getN(2);
   @$pb.TagNumber(3)
-  set coordinates($0.GpsCoordinates v) { setField(3, v); }
+  set coordinates($1.GpsCoordinates v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCoordinates() => $_has(2);
   @$pb.TagNumber(3)
   void clearCoordinates() => clearField(3);
   @$pb.TagNumber(3)
-  $0.GpsCoordinates ensureCoordinates() => $_ensure(2);
+  $1.GpsCoordinates ensureCoordinates() => $_ensure(2);
 
   @$pb.TagNumber(4)
   MarsStatus get status => $_getN(3);

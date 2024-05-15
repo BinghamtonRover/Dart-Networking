@@ -13,7 +13,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'core.pbenum.dart' as $1;
+import 'core.pbenum.dart' as $2;
+import 'version.pb.dart' as $0;
 
 class DriveCommand extends $pb.GeneratedMessage {
   factory DriveCommand({
@@ -27,7 +28,8 @@ class DriveCommand extends $pb.GeneratedMessage {
     $core.double? frontTilt,
     $core.double? rearSwivel,
     $core.double? rearTilt,
-    $1.RoverStatus? status,
+    $2.RoverStatus? status,
+    $0.Version? version,
   }) {
     final $result = create();
     if (throttle != null) {
@@ -63,6 +65,9 @@ class DriveCommand extends $pb.GeneratedMessage {
     if (status != null) {
       $result.status = status;
     }
+    if (version != null) {
+      $result.version = version;
+    }
     return $result;
   }
   DriveCommand._() : super();
@@ -80,7 +85,8 @@ class DriveCommand extends $pb.GeneratedMessage {
     ..a<$core.double>(8, _omitFieldNames ? '' : 'frontTilt', $pb.PbFieldType.OF)
     ..a<$core.double>(9, _omitFieldNames ? '' : 'rearSwivel', $pb.PbFieldType.OF)
     ..a<$core.double>(10, _omitFieldNames ? '' : 'rearTilt', $pb.PbFieldType.OF)
-    ..e<$1.RoverStatus>(11, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $1.RoverStatus.DISCONNECTED, valueOf: $1.RoverStatus.valueOf, enumValues: $1.RoverStatus.values)
+    ..e<$2.RoverStatus>(11, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $2.RoverStatus.DISCONNECTED, valueOf: $2.RoverStatus.valueOf, enumValues: $2.RoverStatus.values)
+    ..aOM<$0.Version>(12, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
     ..hasRequiredFields = false
   ;
 
@@ -202,13 +208,24 @@ class DriveCommand extends $pb.GeneratedMessage {
   void clearRearTilt() => clearField(10);
 
   @$pb.TagNumber(11)
-  $1.RoverStatus get status => $_getN(10);
+  $2.RoverStatus get status => $_getN(10);
   @$pb.TagNumber(11)
-  set status($1.RoverStatus v) { setField(11, v); }
+  set status($2.RoverStatus v) { setField(11, v); }
   @$pb.TagNumber(11)
   $core.bool hasStatus() => $_has(10);
   @$pb.TagNumber(11)
   void clearStatus() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $0.Version get version => $_getN(11);
+  @$pb.TagNumber(12)
+  set version($0.Version v) { setField(12, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasVersion() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearVersion() => clearField(12);
+  @$pb.TagNumber(12)
+  $0.Version ensureVersion() => $_ensure(11);
 }
 
 class DriveData extends $pb.GeneratedMessage {
@@ -226,6 +243,7 @@ class DriveData extends $pb.GeneratedMessage {
     $core.double? batteryVoltage,
     $core.double? batteryCurrent,
     $core.double? batteryTemperature,
+    $0.Version? version,
     $core.double? backLeft,
     $core.double? middleLeft,
     $core.double? frontLeft,
@@ -273,6 +291,9 @@ class DriveData extends $pb.GeneratedMessage {
     if (batteryTemperature != null) {
       $result.batteryTemperature = batteryTemperature;
     }
+    if (version != null) {
+      $result.version = version;
+    }
     if (backLeft != null) {
       $result.backLeft = backLeft;
     }
@@ -311,12 +332,13 @@ class DriveData extends $pb.GeneratedMessage {
     ..a<$core.double>(11, _omitFieldNames ? '' : 'batteryVoltage', $pb.PbFieldType.OF)
     ..a<$core.double>(12, _omitFieldNames ? '' : 'batteryCurrent', $pb.PbFieldType.OF)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'batteryTemperature', $pb.PbFieldType.OF)
-    ..a<$core.double>(14, _omitFieldNames ? '' : 'backLeft', $pb.PbFieldType.OF)
-    ..a<$core.double>(15, _omitFieldNames ? '' : 'middleLeft', $pb.PbFieldType.OF)
-    ..a<$core.double>(16, _omitFieldNames ? '' : 'frontLeft', $pb.PbFieldType.OF)
-    ..a<$core.double>(17, _omitFieldNames ? '' : 'backRight', $pb.PbFieldType.OF)
-    ..a<$core.double>(18, _omitFieldNames ? '' : 'middleRight', $pb.PbFieldType.OF)
-    ..a<$core.double>(19, _omitFieldNames ? '' : 'frontRight', $pb.PbFieldType.OF)
+    ..aOM<$0.Version>(14, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'backLeft', $pb.PbFieldType.OF)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'middleLeft', $pb.PbFieldType.OF)
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'frontLeft', $pb.PbFieldType.OF)
+    ..a<$core.double>(18, _omitFieldNames ? '' : 'backRight', $pb.PbFieldType.OF)
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'middleRight', $pb.PbFieldType.OF)
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'frontRight', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -465,60 +487,71 @@ class DriveData extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearBatteryTemperature() => clearField(13);
 
+  @$pb.TagNumber(14)
+  $0.Version get version => $_getN(13);
+  @$pb.TagNumber(14)
+  set version($0.Version v) { setField(14, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasVersion() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearVersion() => clearField(14);
+  @$pb.TagNumber(14)
+  $0.Version ensureVersion() => $_ensure(13);
+
   /// Information about each wheel in rpm
-  @$pb.TagNumber(14)
-  $core.double get backLeft => $_getN(13);
-  @$pb.TagNumber(14)
-  set backLeft($core.double v) { $_setFloat(13, v); }
-  @$pb.TagNumber(14)
-  $core.bool hasBackLeft() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearBackLeft() => clearField(14);
-
   @$pb.TagNumber(15)
-  $core.double get middleLeft => $_getN(14);
+  $core.double get backLeft => $_getN(14);
   @$pb.TagNumber(15)
-  set middleLeft($core.double v) { $_setFloat(14, v); }
+  set backLeft($core.double v) { $_setFloat(14, v); }
   @$pb.TagNumber(15)
-  $core.bool hasMiddleLeft() => $_has(14);
+  $core.bool hasBackLeft() => $_has(14);
   @$pb.TagNumber(15)
-  void clearMiddleLeft() => clearField(15);
+  void clearBackLeft() => clearField(15);
 
   @$pb.TagNumber(16)
-  $core.double get frontLeft => $_getN(15);
+  $core.double get middleLeft => $_getN(15);
   @$pb.TagNumber(16)
-  set frontLeft($core.double v) { $_setFloat(15, v); }
+  set middleLeft($core.double v) { $_setFloat(15, v); }
   @$pb.TagNumber(16)
-  $core.bool hasFrontLeft() => $_has(15);
+  $core.bool hasMiddleLeft() => $_has(15);
   @$pb.TagNumber(16)
-  void clearFrontLeft() => clearField(16);
+  void clearMiddleLeft() => clearField(16);
 
   @$pb.TagNumber(17)
-  $core.double get backRight => $_getN(16);
+  $core.double get frontLeft => $_getN(16);
   @$pb.TagNumber(17)
-  set backRight($core.double v) { $_setFloat(16, v); }
+  set frontLeft($core.double v) { $_setFloat(16, v); }
   @$pb.TagNumber(17)
-  $core.bool hasBackRight() => $_has(16);
+  $core.bool hasFrontLeft() => $_has(16);
   @$pb.TagNumber(17)
-  void clearBackRight() => clearField(17);
+  void clearFrontLeft() => clearField(17);
 
   @$pb.TagNumber(18)
-  $core.double get middleRight => $_getN(17);
+  $core.double get backRight => $_getN(17);
   @$pb.TagNumber(18)
-  set middleRight($core.double v) { $_setFloat(17, v); }
+  set backRight($core.double v) { $_setFloat(17, v); }
   @$pb.TagNumber(18)
-  $core.bool hasMiddleRight() => $_has(17);
+  $core.bool hasBackRight() => $_has(17);
   @$pb.TagNumber(18)
-  void clearMiddleRight() => clearField(18);
+  void clearBackRight() => clearField(18);
 
   @$pb.TagNumber(19)
-  $core.double get frontRight => $_getN(18);
+  $core.double get middleRight => $_getN(18);
   @$pb.TagNumber(19)
-  set frontRight($core.double v) { $_setFloat(18, v); }
+  set middleRight($core.double v) { $_setFloat(18, v); }
   @$pb.TagNumber(19)
-  $core.bool hasFrontRight() => $_has(18);
+  $core.bool hasMiddleRight() => $_has(18);
   @$pb.TagNumber(19)
-  void clearFrontRight() => clearField(19);
+  void clearMiddleRight() => clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.double get frontRight => $_getN(19);
+  @$pb.TagNumber(20)
+  set frontRight($core.double v) { $_setFloat(19, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasFrontRight() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearFrontRight() => clearField(20);
 }
 
 
