@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'core.pbenum.dart';
+import 'status.pbenum.dart' as $1;
 
 export 'core.pbenum.dart';
 
@@ -139,7 +140,7 @@ class Disconnect extends $pb.GeneratedMessage {
 /// / must respond with the exact same message to confirm its receipt.
 class UpdateSetting extends $pb.GeneratedMessage {
   factory UpdateSetting({
-    RoverStatus? status,
+    $1.RoverStatus? status,
     ProtoColor? color,
   }) {
     final $result = create();
@@ -156,7 +157,7 @@ class UpdateSetting extends $pb.GeneratedMessage {
   factory UpdateSetting.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSetting', createEmptyInstance: create)
-    ..e<RoverStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: RoverStatus.DISCONNECTED, valueOf: RoverStatus.valueOf, enumValues: RoverStatus.values)
+    ..e<$1.RoverStatus>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: $1.RoverStatus.DISCONNECTED, valueOf: $1.RoverStatus.valueOf, enumValues: $1.RoverStatus.values)
     ..aOM<ProtoColor>(2, _omitFieldNames ? '' : 'color', subBuilder: ProtoColor.create)
     ..hasRequiredFields = false
   ;
@@ -183,9 +184,9 @@ class UpdateSetting extends $pb.GeneratedMessage {
   static UpdateSetting? _defaultInstance;
 
   @$pb.TagNumber(1)
-  RoverStatus get status => $_getN(0);
+  $1.RoverStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set status(RoverStatus v) { setField(1, v); }
+  set status($1.RoverStatus v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)

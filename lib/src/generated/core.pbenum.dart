@@ -23,7 +23,10 @@ class Device extends $pb.ProtobufEnum {
   static const Device ARM = Device._(6, _omitEnumNames ? '' : 'ARM');
   static const Device GRIPPER = Device._(7, _omitEnumNames ? '' : 'GRIPPER');
   static const Device SCIENCE = Device._(8, _omitEnumNames ? '' : 'SCIENCE');
-  static const Device DRIVE = Device._(9, _omitEnumNames ? '' : 'DRIVE');
+  static const Device ELECTRICAL = Device._(9, _omitEnumNames ? '' : 'ELECTRICAL');
+  static const Device DRIVE = Device._(10, _omitEnumNames ? '' : 'DRIVE');
+  static const Device MARS = Device._(11, _omitEnumNames ? '' : 'MARS');
+  static const Device MARS_SERVER = Device._(12, _omitEnumNames ? '' : 'MARS_SERVER');
 
   static const $core.List<Device> values = <Device> [
     DEVICE_UNDEFINED,
@@ -35,41 +38,16 @@ class Device extends $pb.ProtobufEnum {
     ARM,
     GRIPPER,
     SCIENCE,
+    ELECTRICAL,
     DRIVE,
+    MARS,
+    MARS_SERVER,
   ];
 
   static final $core.Map<$core.int, Device> _byValue = $pb.ProtobufEnum.initByValue(values);
   static Device? valueOf($core.int value) => _byValue[value];
 
   const Device._($core.int v, $core.String n) : super(v, n);
-}
-
-/// / Changes the way the rover listens to incoming commands.
-/// /
-/// / - When IDLE, all subsystems will ignore all commands
-/// / - When MANUAL, all subsystems will accept all commands
-/// / - When AUTONOMOUS, the rover will ignore commands from the dashboard
-class RoverStatus extends $pb.ProtobufEnum {
-  static const RoverStatus DISCONNECTED = RoverStatus._(0, _omitEnumNames ? '' : 'DISCONNECTED');
-  static const RoverStatus IDLE = RoverStatus._(1, _omitEnumNames ? '' : 'IDLE');
-  static const RoverStatus MANUAL = RoverStatus._(2, _omitEnumNames ? '' : 'MANUAL');
-  static const RoverStatus AUTONOMOUS = RoverStatus._(3, _omitEnumNames ? '' : 'AUTONOMOUS');
-  static const RoverStatus POWER_OFF = RoverStatus._(4, _omitEnumNames ? '' : 'POWER_OFF');
-  static const RoverStatus RESTART = RoverStatus._(5, _omitEnumNames ? '' : 'RESTART');
-
-  static const $core.List<RoverStatus> values = <RoverStatus> [
-    DISCONNECTED,
-    IDLE,
-    MANUAL,
-    AUTONOMOUS,
-    POWER_OFF,
-    RESTART,
-  ];
-
-  static final $core.Map<$core.int, RoverStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RoverStatus? valueOf($core.int value) => _byValue[value];
-
-  const RoverStatus._($core.int v, $core.String n) : super(v, n);
 }
 
 

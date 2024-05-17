@@ -26,7 +26,10 @@ const Device$json = {
     {'1': 'ARM', '2': 6},
     {'1': 'GRIPPER', '2': 7},
     {'1': 'SCIENCE', '2': 8},
-    {'1': 'DRIVE', '2': 9},
+    {'1': 'ELECTRICAL', '2': 9},
+    {'1': 'DRIVE', '2': 10},
+    {'1': 'MARS', '2': 11},
+    {'1': 'MARS_SERVER', '2': 12},
   ],
 };
 
@@ -34,25 +37,8 @@ const Device$json = {
 final $typed_data.Uint8List deviceDescriptor = $convert.base64Decode(
     'CgZEZXZpY2USFAoQREVWSUNFX1VOREVGSU5FRBAAEg0KCURBU0hCT0FSRBABEg4KClNVQlNZU1'
     'RFTVMQAhIJCgVWSURFTxADEgwKCEFVVE9OT01ZEAQSDAoIRklSTVdBUkUQBRIHCgNBUk0QBhIL'
-    'CgdHUklQUEVSEAcSCwoHU0NJRU5DRRAIEgkKBURSSVZFEAk=');
-
-@$core.Deprecated('Use roverStatusDescriptor instead')
-const RoverStatus$json = {
-  '1': 'RoverStatus',
-  '2': [
-    {'1': 'DISCONNECTED', '2': 0},
-    {'1': 'IDLE', '2': 1},
-    {'1': 'MANUAL', '2': 2},
-    {'1': 'AUTONOMOUS', '2': 3},
-    {'1': 'POWER_OFF', '2': 4},
-    {'1': 'RESTART', '2': 5},
-  ],
-};
-
-/// Descriptor for `RoverStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List roverStatusDescriptor = $convert.base64Decode(
-    'CgtSb3ZlclN0YXR1cxIQCgxESVNDT05ORUNURUQQABIICgRJRExFEAESCgoGTUFOVUFMEAISDg'
-    'oKQVVUT05PTU9VUxADEg0KCVBPV0VSX09GRhAEEgsKB1JFU1RBUlQQBQ==');
+    'CgdHUklQUEVSEAcSCwoHU0NJRU5DRRAIEg4KCkVMRUNUUklDQUwQCRIJCgVEUklWRRAKEggKBE'
+    '1BUlMQCxIPCgtNQVJTX1NFUlZFUhAM');
 
 @$core.Deprecated('Use connectDescriptor instead')
 const Connect$json = {
