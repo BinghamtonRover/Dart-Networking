@@ -56,11 +56,13 @@ class ScienceState extends $pb.ProtobufEnum {
   static const ScienceState SCIENCE_STATE_UNDEFINED = ScienceState._(0, _omitEnumNames ? '' : 'SCIENCE_STATE_UNDEFINED');
   static const ScienceState COLLECT_DATA = ScienceState._(1, _omitEnumNames ? '' : 'COLLECT_DATA');
   static const ScienceState STOP_COLLECTING = ScienceState._(2, _omitEnumNames ? '' : 'STOP_COLLECTING');
+  static const ScienceState STREAM_DATA = ScienceState._(3, _omitEnumNames ? '' : 'STREAM_DATA');
 
   static const $core.List<ScienceState> values = <ScienceState> [
     SCIENCE_STATE_UNDEFINED,
     COLLECT_DATA,
     STOP_COLLECTING,
+    STREAM_DATA,
   ];
 
   static final $core.Map<$core.int, ScienceState> _byValue = $pb.ProtobufEnum.initByValue(values);

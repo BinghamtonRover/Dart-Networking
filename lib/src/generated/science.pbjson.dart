@@ -51,13 +51,14 @@ const ScienceState$json = {
     {'1': 'SCIENCE_STATE_UNDEFINED', '2': 0},
     {'1': 'COLLECT_DATA', '2': 1},
     {'1': 'STOP_COLLECTING', '2': 2},
+    {'1': 'STREAM_DATA', '2': 3},
   ],
 };
 
 /// Descriptor for `ScienceState`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List scienceStateDescriptor = $convert.base64Decode(
     'CgxTY2llbmNlU3RhdGUSGwoXU0NJRU5DRV9TVEFURV9VTkRFRklORUQQABIQCgxDT0xMRUNUX0'
-    'RBVEEQARITCg9TVE9QX0NPTExFQ1RJTkcQAg==');
+    'RBVEEQARITCg9TVE9QX0NPTExFQ1RJTkcQAhIPCgtTVFJFQU1fREFUQRAD');
 
 @$core.Deprecated('Use carouselCommandDescriptor instead')
 const CarouselCommand$json = {
