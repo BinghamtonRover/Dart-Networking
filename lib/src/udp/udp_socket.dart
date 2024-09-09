@@ -72,7 +72,7 @@ class UdpSocket extends Service {
   /// back to back without breaking other logic. If we used the underlying socket directly, resetting
   /// this instance would result in some listeners listening to the old socket and some listening to
   /// the new socket. This controller gives a public API to the underlying socket.
-  final _controller = StreamController<Datagram>();
+  final _controller = StreamController<Datagram>.broadcast();
 
   /// Used to forward events from [_socket] to [_controller].
   StreamSubscription<Datagram>? _subscription;
