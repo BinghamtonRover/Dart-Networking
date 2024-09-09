@@ -8,5 +8,8 @@ abstract class Service {
 
   /// Closes the connection to the device.
   @mustCallSuper
-  Future<void> dispose(); 
+  Future<void> dispose();
+
+  @mustCallSuper
+  Future<void> onDisconnect() async { }
 }

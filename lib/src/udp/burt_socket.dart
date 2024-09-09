@@ -21,10 +21,8 @@ extension on Datagram {
 }
 
 abstract class BurtSocket extends UdpSocket {
-  // final UdpSocket _socket;
   final _controller = StreamController<WrappedMessage>.broadcast();
   final Device? device;
-  // final int? port;
 
   Timer? _heartbeatTimer;
   StreamSubscription<Datagram?>? _subscription;
@@ -36,11 +34,7 @@ abstract class BurtSocket extends UdpSocket {
     super.quiet,
     this.device,
     this.collection,
-  });// : _socket = UdpSocket(
-  //   port: port,
-  //   destination: destination,
-  //   quiet: quiet,
-  // );
+  });
 
   Stream<WrappedMessage> get messages => _controller.stream;
 
@@ -94,10 +88,12 @@ abstract class BurtSocket extends UdpSocket {
   ///
   /// Override this function to run custom code when the device on the other end disconnects.
   /// For example, put code to stop the rover from driving in here when connection is lost.
-  @mustCallSuper
-  void onDisconnect() {
+  @override
+  Future<void> onDisconnect() async {
     logger.info("Port $port is disconnected from $destination");
     sendMessage(Disconnect(sender: device));
     destination = null;
+    await collection?.onDisconnect();
+    await super.onDisconnect();
   }
 }
