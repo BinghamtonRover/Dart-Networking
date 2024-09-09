@@ -9,7 +9,7 @@ final destination = SocketInfo(
 );
 
 void main() async {
-  final client = RoverSocket(port: 8000, destination: destination);
+  final client = RoverSocket(port: 8000, destination: destination, device: Device.DASHBOARD);
   client.stream.listen((packet) {
     final wrapper = WrappedMessage.fromBuffer(packet.data);
     client.logger.info("Received ${wrapper.name} message: ${wrapper.data}");

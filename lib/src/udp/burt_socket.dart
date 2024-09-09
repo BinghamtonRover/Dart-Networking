@@ -22,7 +22,7 @@ extension on Datagram {
 
 abstract class BurtSocket extends UdpSocket {
   final _controller = StreamController<WrappedMessage>.broadcast();
-  final Device? device;
+  final Device device;
 
   Timer? _heartbeatTimer;
   StreamSubscription<Datagram?>? _subscription;
@@ -30,9 +30,9 @@ abstract class BurtSocket extends UdpSocket {
 
   BurtSocket({
     required super.port,
+    required this.device,
     super.destination,
     super.quiet,
-    this.device,
     this.collection,
   });
 

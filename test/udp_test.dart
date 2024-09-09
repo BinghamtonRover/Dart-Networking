@@ -90,8 +90,8 @@ class TestServer extends RoverSocket {
   }
 
   @override
-  void onDisconnect() {
-    super.onDisconnect();
+  Future<void> onDisconnect() async {
+    await super.onDisconnect();
     onDisconnectCalled = true;
   }
 }
