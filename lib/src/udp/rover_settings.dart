@@ -1,33 +1,21 @@
 import "dart:io";
 
-import "package:meta/meta.dart";
 import "package:burt_network/generated.dart";
 
-import "socket_info.dart";
-import "burt_protocol.dart";
+import "burt_socket.dart";
 
 /// A mixin that handles [UpdateSetting] commands.
-mixin RoverSettings on BurtUdpProtocol {
-  @override
-  void onWrapper(WrappedMessage wrapper, SocketInfo source) {
-    if (wrapper.name == UpdateSetting().messageName) {
-      final settings = UpdateSetting.fromBuffer(wrapper.data);
-      updateSettings(settings);
-    } else {
-      super.onWrapper(wrapper, source);
-    }
-  }
-
+mixin RoverSettings on BurtSocket {
   /// Handles an [UpdateSetting] command and updates the appropriate setting.
-  /// 
+  ///
   /// Also sends a handshake response to indicate the message was received.
-  @mustCallSuper
-  Future<void> updateSettings(UpdateSetting settings) async {
+  @override
+  Future<void> onSettings(UpdateSetting settings) async {
     sendMessage(settings);
     if (settings.status == RoverStatus.POWER_OFF) {
       logger.critical("Shutting down...");
       try {
-        await onShutdown().timeout(const Duration(seconds: 5));
+        await shutdown().timeout(const Duration(seconds: 5));
       } catch (error) {
         logger.critical("Error when shutting down: $error");
       }
@@ -39,12 +27,15 @@ mixin RoverSettings on BurtUdpProtocol {
   }
 
   /// Restarts this program, usually by disposing and re-initializing the collection.
-  Future<void> restart();
-  
+  Future<void> restart() async {
+    await collection?.dispose();
+    await collection?.init();
+  }
+
   /// Shuts down the program by disposing the collection.
-  /// 
+  ///
   /// This gives any other parts of the rover a chance to shut down as well. For example,
   /// if the Subsystems program shuts down, the drive firmware would continue out of control.
   /// Overriding this function gives it the chance to stop the firmware first.
-  Future<void> onShutdown();
+  Future<void> shutdown() async => await collection?.dispose();
 }

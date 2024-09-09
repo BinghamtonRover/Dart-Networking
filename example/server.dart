@@ -2,17 +2,17 @@ import "package:burt_network/burt_network.dart";
 
 final logger = BurtLogger();
 
-class BasicServer extends ProtoSocket {
-	BasicServer({required super.port, required super.device});
-
-	@override
-	void onWrapper(WrappedMessage wrapper, SocketInfo source) {
-    final message = ScienceData.fromBuffer(wrapper.data); 
-    logger.info("Received ${wrapper.name} message: ${message.toProto3Json()}");
-  }
-}
+void onData(ScienceData data) =>
+  logger.info("Received ScienceData message: ${data.toProto3Json()}");
 
 void main() async {
-	final server = BasicServer(port: 8001, device: Device.SUBSYSTEMS);  // Registers as the Subsystems Server on the Dashboard
+  // Registers as the Subsystems Server on the Dashboard
+	final server = RoverSocket(port: 8001, device: Device.SUBSYSTEMS);
+  final sub = server.stream.onMessage(
+    name: ScienceData().messageName,
+    constructor: ScienceData.fromBuffer,
+    callback: onData,
+  );
+  await sub.cancel();
 	await server.init();
 }
