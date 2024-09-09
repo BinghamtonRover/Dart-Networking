@@ -20,40 +20,37 @@ extension on Datagram {
   SocketInfo get source => SocketInfo(address: address, port: port);
 }
 
-abstract class BurtSocket extends Service {
-  final UdpSocket _socket;
+abstract class BurtSocket extends UdpSocket {
+  // final UdpSocket _socket;
   final _controller = StreamController<WrappedMessage>.broadcast();
   final Device? device;
-  final int? port;
+  // final int? port;
 
   Timer? _heartbeatTimer;
   StreamSubscription<Datagram?>? _subscription;
   Service? collection;
 
   BurtSocket({
-    required this.port,
+    required super.port,
+    super.destination,
+    super.quiet,
     this.device,
     this.collection,
-    bool quiet = false,
-    SocketInfo? destination,
-  }) : _socket = UdpSocket(
-    port: port,
-    destination: destination,
-    quiet: quiet,
-  );
+  });// : _socket = UdpSocket(
+  //   port: port,
+  //   destination: destination,
+  //   quiet: quiet,
+  // );
 
-  SocketInfo? get destination => _socket.destination;
-  BurtLogger get logger => _socket.logger;
-  Stream<WrappedMessage> get stream => _controller.stream;
+  Stream<WrappedMessage> get messages => _controller.stream;
 
-  void sendWrapper(WrappedMessage wrapper) => _socket.send(wrapper.writeToBuffer());
-  void sendMessage(Message message) => sendWrapper(message.wrap());
-  set destination(SocketInfo? value) => _socket.destination = value;
+  void sendWrapper(WrappedMessage wrapper) => send(wrapper.writeToBuffer());
+  void sendMessage(Message message, {SocketInfo? destination}) => sendWrapper(message.wrap());
 
   @override
   Future<bool> init() async {
-    await _socket.init();
-    _subscription = _socket.stream.listen(_onPacket);
+    await super.init();
+    _subscription = stream.listen(_onPacket);
     _heartbeatTimer = Timer.periodic(heartbeatInterval, (_) => checkHeartbeats());
     return true;
   }
@@ -61,8 +58,8 @@ abstract class BurtSocket extends Service {
   @override
   Future<void> dispose() async {
     await _subscription?.cancel();
-    await _socket.dispose();
     _heartbeatTimer?.cancel();
+    await super.dispose();
   }
 
   void _onPacket(Datagram packet) {
@@ -89,8 +86,8 @@ abstract class BurtSocket extends Service {
   /// Override this function to run custom code when a device connects to this socket.
   @mustCallSuper
   void onConnect(SocketInfo source) {
-    _socket.destination = source;
-    logger.info("Port ${_socket.port} is connected to $source");
+    destination = source;
+    logger.info("Port $port is connected to $source");
   }
 
   /// Sends a [Disconnect] message to the dashboard and sets [destination] to `null`.
@@ -99,8 +96,8 @@ abstract class BurtSocket extends Service {
   /// For example, put code to stop the rover from driving in here when connection is lost.
   @mustCallSuper
   void onDisconnect() {
-    logger.info("Port ${_socket.port} is disconnected from ${_socket.destination}");
+    logger.info("Port $port is disconnected from $destination");
     sendMessage(Disconnect(sender: device));
-    _socket.destination = null;
+    destination = null;
   }
 }

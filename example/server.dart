@@ -8,7 +8,7 @@ void onData(ScienceData data) =>
 void main() async {
   // Registers as the Subsystems Server on the Dashboard
 	final server = RoverSocket(port: 8001, device: Device.SUBSYSTEMS);
-  final sub = server.stream.onMessage(
+  final sub = server.messages.onMessage(
     name: ScienceData().messageName,
     constructor: ScienceData.fromBuffer,
     callback: onData,

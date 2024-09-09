@@ -75,7 +75,7 @@ class TestServer extends RoverSocket {
   @override
   Future<bool> init() async {
     await super.init();
-    stream.onMessage(
+    messages.onMessage(
       name: ScienceData().messageName,
       constructor: ScienceData.fromBuffer,
       callback: (x) => data = x,
