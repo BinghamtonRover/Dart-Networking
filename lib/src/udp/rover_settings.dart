@@ -15,11 +15,11 @@ mixin RoverSettings on BurtSocket {
     if (settings.status == RoverStatus.POWER_OFF) {
       logger.critical("Shutting down...");
       try {
-        await shutdown().timeout(const Duration(seconds: 5));
+        await collection?.dispose().timeout(const Duration(seconds: 5));
       } catch (error) {
         logger.critical("Error when shutting down: $error");
       }
-      if (!Platform.isLinux) exit(0);
+      if (!Platform.isLinux) return;
       await Process.run("sudo", ["shutdown", "now"]);
     } else if (settings.status == RoverStatus.RESTART) {
       await restart();
@@ -31,11 +31,4 @@ mixin RoverSettings on BurtSocket {
     await collection?.dispose();
     await collection?.init();
   }
-
-  /// Shuts down the program by disposing the collection.
-  ///
-  /// This gives any other parts of the rover a chance to shut down as well. For example,
-  /// if the Subsystems program shuts down, the drive firmware would continue out of control.
-  /// Overriding this function gives it the chance to stop the firmware first.
-  Future<void> shutdown() async => await collection?.dispose();
 }

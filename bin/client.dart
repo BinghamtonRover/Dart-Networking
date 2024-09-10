@@ -1,6 +1,8 @@
 import "dart:io";
 import "package:burt_network/burt_network.dart";
 
+// Sends data to server.dart, on the same device or across devices
+
 final destination = SocketInfo(
   // Replace this with a real IP address for testing
   // address: InternetAddress("192.168.1.10"),
@@ -9,14 +11,8 @@ final destination = SocketInfo(
 );
 
 void main() async {
-  final client = RoverSocket(port: 8000, destination: destination, device: Device.DASHBOARD);
-  client.stream.listen((packet) {
-    final wrapper = WrappedMessage.fromBuffer(packet.data);
-    client.logger.info("Received ${wrapper.name} message: ${wrapper.data}");
-  });
-
+  final client = UdpSocket(port: 8000, destination: destination);
 	await client.init();
-  client.destination = destination;
 	final message = ScienceData(temperature: 1, co2: 2);
   while (true) {
     client.sendMessage(message);

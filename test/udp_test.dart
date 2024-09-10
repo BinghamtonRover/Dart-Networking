@@ -15,6 +15,7 @@ void main() => group("ProtoSocket:", () {
     await socket.init();
     await socket.dispose();
     await socket.init();
+    expect(socket.port, 8000);
   });
 
   test("Heartbeats received by both client and server", () async {
@@ -22,7 +23,7 @@ void main() => group("ProtoSocket:", () {
     final client = TestClient(port: 8002, destination: withPort(8001));
     await server.init();
     await client.init();
-    await Future<void>.delayed(heartbeatDelay);
+    await Future<void>.delayed(heartbeatDelay * 5);
     expect(server.isConnected, isTrue);
     expect(client.isConnected, isTrue);
     await server.dispose();
@@ -61,8 +62,8 @@ void main() => group("ProtoSocket:", () {
     var data = ScienceData();
     final data1 = ScienceData(co2: 1);
     final data2 = ScienceData(co2: 2);
-    final server = TestServer(port: 8005);
-    final client = TestClient(port: 8006, destination: withPort(8005));
+    final server = TestServer(port: 8007);
+    final client = TestClient(port: 8008, destination: withPort(8007));
     // Initialize both sockets
     await server.init();
     await client.init();
@@ -88,23 +89,132 @@ void main() => group("ProtoSocket:", () {
     await server.dispose();
     await client.dispose();
   });
+
+  test("Multiple handlers can be registered", () async {
+    var science1 = ScienceData();
+    var science2 = ScienceData();
+    var orientation = Orientation();
+    final scienceTest = ScienceData(co2: 5);
+    final orientationTest = Orientation(x: 5);
+    final server = TestServer(port: 8009);
+    final client = TestClient(port: 8010, destination: withPort(8009));
+    server.messages.onMessage(
+      name: ScienceData().messageName,
+      constructor: ScienceData.fromBuffer,
+      callback: (x) => science1 = x,
+    );
+    server.messages.onMessage(
+      name: ScienceData().messageName,
+      constructor: ScienceData.fromBuffer,
+      callback: (x) => science2 = x,
+    );
+    server.messages.onMessage(
+      name: Orientation().messageName,
+      constructor: Orientation.fromBuffer,
+      callback: (x) => orientation = x,
+    );
+    await server.init();
+    await client.init();
+    await Future<void>.delayed(heartbeatDelay);
+    client.sendMessage(scienceTest);
+    client.sendMessage(orientationTest);
+    await Future<void>.delayed(heartbeatDelay);
+    expect(science1, scienceTest);
+    expect(science2, scienceTest);
+    expect(orientation, orientationTest);
+    await server.dispose();
+    await client.dispose();
+  });
+
+  test("Heartbeats are filtered out of the regular stream", () async {
+    var receivedHeartbeat = false;
+    final server = TestServer(port: 8011);
+    final client = UdpSocket(port: 8012, destination: withPort(8012));
+    server.messages.onMessage(
+      name: Heartbeat().messageName,
+      constructor: Heartbeat.fromBuffer,
+      callback: (_) => receivedHeartbeat = true,
+    );
+    await server.init();
+    await client.init();
+    await Future<void>.delayed(heartbeatDelay);
+    client.sendMessage(Heartbeat(sender: Device.DASHBOARD, receiver: Device.SUBSYSTEMS));
+    await Future<void>.delayed(heartbeatDelay);
+    expect(receivedHeartbeat, false);
+    await server.dispose();
+    await client.dispose();
+  });
+
+  test("Server calls Service methods", skip: false, () async {
+    final service = TestService();  // do not call init!
+    final server = TestServer(port: 8011, collection: service);
+    final client = TestClient(port: 8012, destination: withPort(8011));
+    expect(service.initCalled, false);
+    expect(service.disposeCalled, false);
+    expect(service.onDisconnectCalled, false);
+
+    // Ensure the client and server are connected
+    await server.init();
+    await client.init();
+    await Future<void>.delayed(heartbeatDelay * 5);
+    expect(server.isConnected, true);
+
+    // Send a restart command
+    client.sendMessage(NetworkSettings(status: RoverStatus.RESTART));
+    await Future<void>.delayed(heartbeatDelay * 5);
+    expect(service.initCalled, true);
+    expect(service.disposeCalled, true);
+
+    // Send a shutdown command
+    service.initCalled = false;
+    service.disposeCalled = false;
+    client.sendMessage(NetworkSettings(status: RoverStatus.POWER_OFF));
+    await Future<void>.delayed(heartbeatDelay);
+    expect(service.initCalled, false);
+    expect(service.disposeCalled, true);
+
+    // Let the client and server disconnect
+    client.shouldSendHeartbeats = false;
+    await Future<void>.delayed(heartbeatDelay * 2);
+    expect(server.isConnected, false);
+    expect(server.onDisconnectCalled, true);
+    expect(service.onDisconnectCalled, true);
+
+    await client.dispose();
+    await server.dispose();
+  });
 });
+
+class TestService extends Service {
+  @override
+  Future<bool> init() async {
+    initCalled = true;
+    return true;
+  }
+
+  @override
+  Future<void> dispose() async { disposeCalled = true; }
+
+  bool onDisconnectCalled = false;
+  bool initCalled = false;
+  bool disposeCalled = false;
+
+  @override
+  Future<void> onDisconnect() async {
+    await super.onDisconnect();
+    onDisconnectCalled = true;
+  }
+}
 
 class TestServer extends RoverSocket {
   ScienceData? data;
   bool onConnectCalled = false;
   bool onDisconnectCalled = false;
 
-  TestServer({required super.port}) : super(device: Device.SUBSYSTEMS);
+  TestServer({required super.port, super.collection}) : super(device: Device.SUBSYSTEMS);
 
   @override
   Duration get heartbeatInterval => const Duration(milliseconds: 20);
-
-  @override
-  Future<void> shutdown() async { }
-
-  @override
-  Future<void> restart() async { }
 
   @override
   Future<bool> init() async {

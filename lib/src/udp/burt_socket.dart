@@ -59,6 +59,7 @@ abstract class BurtSocket extends UdpSocket {
   });
 
   /// A stream of [WrappedMessage]s as they arrive in the UDP socket.
+  @override
   Stream<WrappedMessage> get messages => _controller.stream;
 
   @override
