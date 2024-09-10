@@ -10,6 +10,13 @@ SocketInfo withPort(int port) => SocketInfo(address: InternetAddress.loopbackIPv
 void main() => group("ProtoSocket:", () {
   Logger.level = LogLevel.off;
 
+  test("Socket can be safely reset", () async {
+    final socket = RoverSocket(port: 8000, device: Device.SUBSYSTEMS);
+    await socket.init();
+    await socket.dispose();
+    await socket.init();
+  });
+
   test("Heartbeats received by both client and server", () async {
     final server = TestServer(port: 8001);
     final client = TestClient(port: 8002, destination: withPort(8001));
@@ -50,10 +57,37 @@ void main() => group("ProtoSocket:", () {
     await client.dispose();
   });
 
-  // tearDownAll(() async {
-  //   await server.dispose();
-  //   await client.dispose();
-  // });
+  test("Data arrives after a socket is reset", () async {
+    var data = ScienceData();
+    final data1 = ScienceData(co2: 1);
+    final data2 = ScienceData(co2: 2);
+    final server = TestServer(port: 8005);
+    final client = TestClient(port: 8006, destination: withPort(8005));
+    // Initialize both sockets
+    await server.init();
+    await client.init();
+    server.messages.onMessage(
+      name: ScienceData().messageName,
+      constructor: ScienceData.fromBuffer,
+      callback: (d) => data = d,
+    );
+    // Send the first packet
+    client.sendMessage(data1);
+    await Future<void>.delayed(heartbeatDelay);
+    expect(data, equals(data1));
+    expect(server.data, equals(data1));
+    // Reset the server
+    await server.dispose();
+    await server.init();
+    await Future<void>.delayed(heartbeatDelay);
+    // Send the second packet
+    client.sendMessage(data2);
+    await Future<void>.delayed(heartbeatDelay);
+    expect(data, equals(data2));
+    expect(server.data, equals(data2));
+    await server.dispose();
+    await client.dispose();
+  });
 });
 
 class TestServer extends RoverSocket {

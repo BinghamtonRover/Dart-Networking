@@ -78,6 +78,7 @@ class SerialDevice extends Service {
   @override
 	Future<void> dispose() async {
     _timer?.cancel();
+    await _controller.close();
 		await _port.dispose();
 	}
 
