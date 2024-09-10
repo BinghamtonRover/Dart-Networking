@@ -117,10 +117,12 @@ class UdpSocket extends Service {
   }
 
   /// Sends a [WrappedMessage] over the socket.
-  void sendWrapper(WrappedMessage wrapper) => send(wrapper.writeToBuffer());
+  void sendWrapper(WrappedMessage wrapper, {SocketInfo? destination}) =>
+    send(wrapper.writeToBuffer(), destination: destination);
 
   /// Sends a [Message] over the socket (in a [WrappedMessage]).
-  void sendMessage(Message message) => sendWrapper(message.wrap());
+  void sendMessage(Message message, {SocketInfo? destination}) =>
+    sendWrapper(message.wrap(), destination: destination);
 
   /// Wraps all incoming data in a [WrappedMessage].
   Stream<WrappedMessage> get messages => stream

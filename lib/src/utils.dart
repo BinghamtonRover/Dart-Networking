@@ -35,3 +35,12 @@ extension NullableStreamUtils<T> on Stream<T?> {
   /// Transforms a stream of type `T?` to type `T` by filtering out nulls.
   Stream<T> notNull() => where((x) => x != null).cast<T>();
 }
+
+/// Returns the type of data message that would be emitted by this device.
+String? deviceToDataName(Device device) => switch (device) {
+  Device.ARM => ArmData().messageName,
+  Device.DRIVE => DriveData().messageName,
+  Device.GRIPPER => GripperData().messageName,
+  Device.SCIENCE => ScienceData().messageName,
+  _ => null,
+};

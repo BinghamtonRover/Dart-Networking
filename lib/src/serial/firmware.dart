@@ -4,6 +4,7 @@ import "package:protobuf/protobuf.dart";
 
 import "package:burt_network/burt_network.dart";
 
+
 /// Represents a firmware device connected over Serial.
 ///
 /// This device starts with an unknown [device]. Calling [init] starts a handshake with the device
@@ -40,7 +41,7 @@ class BurtFirmwareSerial extends Service {
 
   /// The stream of incoming messages, wrapped into [WrappedMessage]s.
   Stream<WrappedMessage>? get messages => _serial.stream
-    .map((packet) => WrappedMessage(data: packet, name: device.name));
+    .map((packet) => WrappedMessage(data: packet, name: deviceToDataName(device)));
 
   /// Whether this device has passed the handshake.
 	bool get isReady => device != Device.FIRMWARE;
