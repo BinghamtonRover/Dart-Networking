@@ -112,7 +112,7 @@ class UdpSocket extends Service {
   void send(List<int> data, {SocketInfo? destination}) {
     final target = destination ?? this.destination;
     if (target == null) return;
-    if (_socket == null) throw StateError("Cannot use a UdpSocket on port $port after it's been disposed");
+    if (_socket == null) throw StateError("Cannot use a UdpSocket on port $_port after it's been disposed");
     _socket!.send(data, target.address, target.port);
   }
 
