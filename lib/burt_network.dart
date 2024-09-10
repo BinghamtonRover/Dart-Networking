@@ -37,3 +37,4 @@ export "src/serial/port_interface.dart";
 export "service.dart";
 export "generated.dart";
 export "logging.dart";
+export "src/utils.dart";

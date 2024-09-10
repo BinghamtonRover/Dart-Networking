@@ -1,15 +1,7 @@
 import "dart:io";
 import "dart:async";
 
-import "package:burt_network/generated.dart";
-import "package:burt_network/logging.dart";
-
-import "socket_info.dart";
-import "package:burt_network/service.dart";
-
-extension <T> on Stream<T?> {
-  Stream<T> notNull() => where((x) => x != null).cast<T>();
-}
+import "package:burt_network/burt_network.dart";
 
 extension on RawDatagramSocket {
   Stream<Datagram> onlyData() =>
@@ -25,7 +17,8 @@ extension on RawDatagramSocket {
 ///
 /// - Call [init] to open the socket on the given [port].
 /// - Call [send] to send raw data to another socket.
-/// - Call [dispose] to close the socket. Messages can no longer be sent or received after this.
+/// - Call [dispose] to close the socket.
+/// - Use [stream] to listen to new packets ([Datagram]s) as they arrive over the socket.
 class UdpSocket extends Service {
   /// A collection of allowed [OSError] codes.
   ///
@@ -123,6 +116,9 @@ class UdpSocket extends Service {
     _socket!.send(data, target.address, target.port);
   }
 
+  /// Sends a [WrappedMessage] over the socket.
   void sendWrapper(WrappedMessage wrapper) => send(wrapper.writeToBuffer());
+
+  /// Sends a [Message] over the socket (in a [WrappedMessage]).
   void sendMessage(Message message) => sendWrapper(message.wrap());
 }

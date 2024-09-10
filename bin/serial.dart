@@ -33,7 +33,7 @@ Future<void> listenToFirmware(String port) async {
     return;
   }
   logger.info("Connected? ${device.isReady}. Listening...");
-  device.stream?.listen(process);
+  device.rawStream.listen(process);
 }
 
 void main(List<String> args) async {

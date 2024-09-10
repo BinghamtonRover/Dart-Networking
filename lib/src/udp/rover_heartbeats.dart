@@ -22,7 +22,7 @@ mixin RoverHeartbeats on BurtSocket {
   /// 3. If it came from another dashboard, log it and ignore it.
   /// 4. If we are not connected to any dashboard, call [onConnect] and respond to it.
   @override
-  void onHeartbeat(Connect heartbeat, SocketInfo source) {
+  void onHeartbeat(Heartbeat heartbeat, SocketInfo source) {
     if (heartbeat.receiver != device) {  // (1)
       logger.warning("Received a misaddressed heartbeat for ${heartbeat.receiver}");
     } else if (isConnected) {
@@ -46,7 +46,7 @@ mixin RoverHeartbeats on BurtSocket {
       didReceivedHeartbeat = false;
     } else if (isConnected) {
       logger.warning("Heartbeat not received. Assuming the dashboard has disconnected");
-      onDisconnect();
+      await onDisconnect();
     }
   }
 

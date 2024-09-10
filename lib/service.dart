@@ -10,6 +10,7 @@ abstract class Service {
   @mustCallSuper
   Future<void> dispose();
 
+  /// A callback to run when the program has disconnected from the Dashboard.
   @mustCallSuper
   Future<void> onDisconnect() async { }
 }
