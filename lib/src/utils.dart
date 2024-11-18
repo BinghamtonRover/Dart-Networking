@@ -42,5 +42,6 @@ String? deviceToDataName(Device device) => switch (device) {
   Device.DRIVE => DriveData().messageName,
   Device.GRIPPER => GripperData().messageName,
   Device.SCIENCE => ScienceData().messageName,
+  Device.ANTENNA => AntennaData().messageName,
   _ => null,
 };

@@ -13,25 +13,23 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class MarsStatus extends $pb.ProtobufEnum {
-  static const MarsStatus MARS_STATUS_UNDEFINED = MarsStatus._(0, _omitEnumNames ? '' : 'MARS_STATUS_UNDEFINED');
-  static const MarsStatus PORT_NOT_FOUND = MarsStatus._(1, _omitEnumNames ? '' : 'PORT_NOT_FOUND');
-  static const MarsStatus TEENSY_UNRESPONSIVE = MarsStatus._(2, _omitEnumNames ? '' : 'TEENSY_UNRESPONSIVE');
-  static const MarsStatus FAILED_HANDSHAKE = MarsStatus._(3, _omitEnumNames ? '' : 'FAILED_HANDSHAKE');
-  static const MarsStatus TEENSY_CONNECTED = MarsStatus._(4, _omitEnumNames ? '' : 'TEENSY_CONNECTED');
+class AntennaControlMode extends $pb.ProtobufEnum {
+  static const AntennaControlMode ANTENNA_CONTROL_MODE_UNDEFINED = AntennaControlMode._(0, _omitEnumNames ? '' : 'ANTENNA_CONTROL_MODE_UNDEFINED');
+  static const AntennaControlMode TRACK_ROVER = AntennaControlMode._(1, _omitEnumNames ? '' : 'TRACK_ROVER');
+  static const AntennaControlMode MANUAL_SPEED = AntennaControlMode._(2, _omitEnumNames ? '' : 'MANUAL_SPEED');
+  static const AntennaControlMode STOP_ANTENNA = AntennaControlMode._(3, _omitEnumNames ? '' : 'STOP_ANTENNA');
 
-  static const $core.List<MarsStatus> values = <MarsStatus> [
-    MARS_STATUS_UNDEFINED,
-    PORT_NOT_FOUND,
-    TEENSY_UNRESPONSIVE,
-    FAILED_HANDSHAKE,
-    TEENSY_CONNECTED,
+  static const $core.List<AntennaControlMode> values = <AntennaControlMode> [
+    ANTENNA_CONTROL_MODE_UNDEFINED,
+    TRACK_ROVER,
+    MANUAL_SPEED,
+    STOP_ANTENNA,
   ];
 
-  static final $core.Map<$core.int, MarsStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static MarsStatus? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, AntennaControlMode> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static AntennaControlMode? valueOf($core.int value) => _byValue[value];
 
-  const MarsStatus._($core.int v, $core.String n) : super(v, n);
+  const AntennaControlMode._($core.int v, $core.String n) : super(v, n);
 }
 
 
