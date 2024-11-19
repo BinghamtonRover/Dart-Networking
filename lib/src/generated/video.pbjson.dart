@@ -94,13 +94,6 @@ const VideoData$json = {
     {'1': 'frame', '3': 3, '4': 1, '5': 12, '10': 'frame'},
     {'1': 'version', '3': 4, '4': 1, '5': 11, '6': '.Version', '10': 'version'},
     {'1': 'imagePath', '3': 5, '4': 1, '5': 9, '10': 'imagePath'},
-    {'1': 'leftObstacle', '3': 6, '4': 1, '5': 14, '6': '.BoolState', '10': 'leftObstacle'},
-    {'1': 'centerObstacle', '3': 7, '4': 1, '5': 14, '6': '.BoolState', '10': 'centerObstacle'},
-    {'1': 'rightObstacle', '3': 8, '4': 1, '5': 14, '6': '.BoolState', '10': 'rightObstacle'},
-    {'1': 'bottomObstacle', '3': 9, '4': 1, '5': 14, '6': '.BoolState', '10': 'bottomObstacle'},
-    {'1': 'arucoDetected', '3': 10, '4': 1, '5': 14, '6': '.BoolState', '10': 'arucoDetected'},
-    {'1': 'arucoSize', '3': 11, '4': 1, '5': 2, '10': 'arucoSize'},
-    {'1': 'arucoPosition', '3': 12, '4': 1, '5': 2, '10': 'arucoPosition'},
   ],
 };
 
@@ -108,13 +101,7 @@ const VideoData$json = {
 final $typed_data.Uint8List videoDataDescriptor = $convert.base64Decode(
     'CglWaWRlb0RhdGESDgoCaWQYASABKAlSAmlkEigKB2RldGFpbHMYAiABKAsyDi5DYW1lcmFEZX'
     'RhaWxzUgdkZXRhaWxzEhQKBWZyYW1lGAMgASgMUgVmcmFtZRIiCgd2ZXJzaW9uGAQgASgLMggu'
-    'VmVyc2lvblIHdmVyc2lvbhIcCglpbWFnZVBhdGgYBSABKAlSCWltYWdlUGF0aBIuCgxsZWZ0T2'
-    'JzdGFjbGUYBiABKA4yCi5Cb29sU3RhdGVSDGxlZnRPYnN0YWNsZRIyCg5jZW50ZXJPYnN0YWNs'
-    'ZRgHIAEoDjIKLkJvb2xTdGF0ZVIOY2VudGVyT2JzdGFjbGUSMAoNcmlnaHRPYnN0YWNsZRgIIA'
-    'EoDjIKLkJvb2xTdGF0ZVINcmlnaHRPYnN0YWNsZRIyCg5ib3R0b21PYnN0YWNsZRgJIAEoDjIK'
-    'LkJvb2xTdGF0ZVIOYm90dG9tT2JzdGFjbGUSMAoNYXJ1Y29EZXRlY3RlZBgKIAEoDjIKLkJvb2'
-    'xTdGF0ZVINYXJ1Y29EZXRlY3RlZBIcCglhcnVjb1NpemUYCyABKAJSCWFydWNvU2l6ZRIkCg1h'
-    'cnVjb1Bvc2l0aW9uGAwgASgCUg1hcnVjb1Bvc2l0aW9u');
+    'VmVyc2lvblIHdmVyc2lvbhIcCglpbWFnZVBhdGgYBSABKAlSCWltYWdlUGF0aA==');
 
 @$core.Deprecated('Use videoCommandDescriptor instead')
 const VideoCommand$json = {
@@ -132,4 +119,58 @@ final $typed_data.Uint8List videoCommandDescriptor = $convert.base64Decode(
     'CgxWaWRlb0NvbW1hbmQSDgoCaWQYASABKAlSAmlkEigKB2RldGFpbHMYAiABKAsyDi5DYW1lcm'
     'FEZXRhaWxzUgdkZXRhaWxzEiIKB3ZlcnNpb24YAyABKAsyCC5WZXJzaW9uUgd2ZXJzaW9uEiIK'
     'DHRha2VTbmFwc2hvdBgEIAEoCFIMdGFrZVNuYXBzaG90');
+
+@$core.Deprecated('Use imageAnalysisCommandDescriptor instead')
+const ImageAnalysisCommand$json = {
+  '1': 'ImageAnalysisCommand',
+  '2': [
+    {'1': 'frame', '3': 1, '4': 1, '5': 12, '10': 'frame'},
+  ],
+};
+
+/// Descriptor for `ImageAnalysisCommand`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imageAnalysisCommandDescriptor = $convert.base64Decode(
+    'ChRJbWFnZUFuYWx5c2lzQ29tbWFuZBIUCgVmcmFtZRgBIAEoDFIFZnJhbWU=');
+
+@$core.Deprecated('Use imageAnalysisDataDescriptor instead')
+const ImageAnalysisData$json = {
+  '1': 'ImageAnalysisData',
+  '2': [
+    {'1': 'objects', '3': 1, '4': 3, '5': 11, '6': '.ImageAnalysisObject', '10': 'objects'},
+  ],
+};
+
+/// Descriptor for `ImageAnalysisData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imageAnalysisDataDescriptor = $convert.base64Decode(
+    'ChFJbWFnZUFuYWx5c2lzRGF0YRIuCgdvYmplY3RzGAEgAygLMhQuSW1hZ2VBbmFseXNpc09iam'
+    'VjdFIHb2JqZWN0cw==');
+
+@$core.Deprecated('Use imageAnalysisObjectDescriptor instead')
+const ImageAnalysisObject$json = {
+  '1': 'ImageAnalysisObject',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'top_left', '3': 2, '4': 1, '5': 11, '6': '.ImageAnalysisCoordinates', '10': 'topLeft'},
+    {'1': 'bottom_right', '3': 3, '4': 1, '5': 11, '6': '.ImageAnalysisCoordinates', '10': 'bottomRight'},
+  ],
+};
+
+/// Descriptor for `ImageAnalysisObject`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imageAnalysisObjectDescriptor = $convert.base64Decode(
+    'ChNJbWFnZUFuYWx5c2lzT2JqZWN0EhIKBG5hbWUYASABKAlSBG5hbWUSNAoIdG9wX2xlZnQYAi'
+    'ABKAsyGS5JbWFnZUFuYWx5c2lzQ29vcmRpbmF0ZXNSB3RvcExlZnQSPAoMYm90dG9tX3JpZ2h0'
+    'GAMgASgLMhkuSW1hZ2VBbmFseXNpc0Nvb3JkaW5hdGVzUgtib3R0b21SaWdodA==');
+
+@$core.Deprecated('Use imageAnalysisCoordinatesDescriptor instead')
+const ImageAnalysisCoordinates$json = {
+  '1': 'ImageAnalysisCoordinates',
+  '2': [
+    {'1': 'x', '3': 1, '4': 1, '5': 5, '10': 'x'},
+    {'1': 'y', '3': 2, '4': 1, '5': 5, '10': 'y'},
+  ],
+};
+
+/// Descriptor for `ImageAnalysisCoordinates`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imageAnalysisCoordinatesDescriptor = $convert.base64Decode(
+    'ChhJbWFnZUFuYWx5c2lzQ29vcmRpbmF0ZXMSDAoBeBgBIAEoBVIBeBIMCgF5GAIgASgFUgF5');
 

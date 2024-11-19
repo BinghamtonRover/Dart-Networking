@@ -13,7 +13,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'utils.pbenum.dart' as $1;
 import 'version.pb.dart' as $0;
 import 'video.pbenum.dart';
 
@@ -223,13 +222,6 @@ class VideoData extends $pb.GeneratedMessage {
     $core.List<$core.int>? frame,
     $0.Version? version,
     $core.String? imagePath,
-    $1.BoolState? leftObstacle,
-    $1.BoolState? centerObstacle,
-    $1.BoolState? rightObstacle,
-    $1.BoolState? bottomObstacle,
-    $1.BoolState? arucoDetected,
-    $core.double? arucoSize,
-    $core.double? arucoPosition,
   }) {
     final $result = create();
     if (id != null) {
@@ -247,27 +239,6 @@ class VideoData extends $pb.GeneratedMessage {
     if (imagePath != null) {
       $result.imagePath = imagePath;
     }
-    if (leftObstacle != null) {
-      $result.leftObstacle = leftObstacle;
-    }
-    if (centerObstacle != null) {
-      $result.centerObstacle = centerObstacle;
-    }
-    if (rightObstacle != null) {
-      $result.rightObstacle = rightObstacle;
-    }
-    if (bottomObstacle != null) {
-      $result.bottomObstacle = bottomObstacle;
-    }
-    if (arucoDetected != null) {
-      $result.arucoDetected = arucoDetected;
-    }
-    if (arucoSize != null) {
-      $result.arucoSize = arucoSize;
-    }
-    if (arucoPosition != null) {
-      $result.arucoPosition = arucoPosition;
-    }
     return $result;
   }
   VideoData._() : super();
@@ -280,13 +251,6 @@ class VideoData extends $pb.GeneratedMessage {
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'frame', $pb.PbFieldType.OY)
     ..aOM<$0.Version>(4, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
     ..aOS(5, _omitFieldNames ? '' : 'imagePath', protoName: 'imagePath')
-    ..e<$1.BoolState>(6, _omitFieldNames ? '' : 'leftObstacle', $pb.PbFieldType.OE, protoName: 'leftObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(7, _omitFieldNames ? '' : 'centerObstacle', $pb.PbFieldType.OE, protoName: 'centerObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(8, _omitFieldNames ? '' : 'rightObstacle', $pb.PbFieldType.OE, protoName: 'rightObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(9, _omitFieldNames ? '' : 'bottomObstacle', $pb.PbFieldType.OE, protoName: 'bottomObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(10, _omitFieldNames ? '' : 'arucoDetected', $pb.PbFieldType.OE, protoName: 'arucoDetected', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..a<$core.double>(11, _omitFieldNames ? '' : 'arucoSize', $pb.PbFieldType.OF, protoName: 'arucoSize')
-    ..a<$core.double>(12, _omitFieldNames ? '' : 'arucoPosition', $pb.PbFieldType.OF, protoName: 'arucoPosition')
     ..hasRequiredFields = false
   ;
 
@@ -362,74 +326,6 @@ class VideoData extends $pb.GeneratedMessage {
   $core.bool hasImagePath() => $_has(4);
   @$pb.TagNumber(5)
   void clearImagePath() => clearField(5);
-
-  /// / Data for autonomy to make decisions
-  /// / Is there an obstacle in the way? Yes or No.
-  @$pb.TagNumber(6)
-  $1.BoolState get leftObstacle => $_getN(5);
-  @$pb.TagNumber(6)
-  set leftObstacle($1.BoolState v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasLeftObstacle() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearLeftObstacle() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $1.BoolState get centerObstacle => $_getN(6);
-  @$pb.TagNumber(7)
-  set centerObstacle($1.BoolState v) { setField(7, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasCenterObstacle() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCenterObstacle() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $1.BoolState get rightObstacle => $_getN(7);
-  @$pb.TagNumber(8)
-  set rightObstacle($1.BoolState v) { setField(8, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasRightObstacle() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearRightObstacle() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $1.BoolState get bottomObstacle => $_getN(8);
-  @$pb.TagNumber(9)
-  set bottomObstacle($1.BoolState v) { setField(9, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasBottomObstacle() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearBottomObstacle() => clearField(9);
-
-  /// Aruco detection state
-  @$pb.TagNumber(10)
-  $1.BoolState get arucoDetected => $_getN(9);
-  @$pb.TagNumber(10)
-  set arucoDetected($1.BoolState v) { setField(10, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasArucoDetected() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearArucoDetected() => clearField(10);
-
-  /// If arucoSize is larger than a certain size (pixels) we have reach it, otherwise head towards it
-  @$pb.TagNumber(11)
-  $core.double get arucoSize => $_getN(10);
-  @$pb.TagNumber(11)
-  set arucoSize($core.double v) { $_setFloat(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasArucoSize() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearArucoSize() => clearField(11);
-
-  /// / Normalized value: -1 to 1, -1 is furthest left, 1 is furthest right
-  @$pb.TagNumber(12)
-  $core.double get arucoPosition => $_getN(11);
-  @$pb.TagNumber(12)
-  set arucoPosition($core.double v) { $_setFloat(11, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasArucoPosition() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearArucoPosition() => clearField(12);
 }
 
 /// / Make changes to a camera feed.
@@ -531,6 +427,246 @@ class VideoCommand extends $pb.GeneratedMessage {
   $core.bool hasTakeSnapshot() => $_has(3);
   @$pb.TagNumber(4)
   void clearTakeSnapshot() => clearField(4);
+}
+
+class ImageAnalysisCommand extends $pb.GeneratedMessage {
+  factory ImageAnalysisCommand({
+    $core.List<$core.int>? frame,
+  }) {
+    final $result = create();
+    if (frame != null) {
+      $result.frame = frame;
+    }
+    return $result;
+  }
+  ImageAnalysisCommand._() : super();
+  factory ImageAnalysisCommand.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageAnalysisCommand.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ImageAnalysisCommand', createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'frame', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisCommand clone() => ImageAnalysisCommand()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisCommand copyWith(void Function(ImageAnalysisCommand) updates) => super.copyWith((message) => updates(message as ImageAnalysisCommand)) as ImageAnalysisCommand;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisCommand create() => ImageAnalysisCommand._();
+  ImageAnalysisCommand createEmptyInstance() => create();
+  static $pb.PbList<ImageAnalysisCommand> createRepeated() => $pb.PbList<ImageAnalysisCommand>();
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisCommand getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageAnalysisCommand>(create);
+  static ImageAnalysisCommand? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get frame => $_getN(0);
+  @$pb.TagNumber(1)
+  set frame($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFrame() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFrame() => clearField(1);
+}
+
+class ImageAnalysisData extends $pb.GeneratedMessage {
+  factory ImageAnalysisData({
+    $core.Iterable<ImageAnalysisObject>? objects,
+  }) {
+    final $result = create();
+    if (objects != null) {
+      $result.objects.addAll(objects);
+    }
+    return $result;
+  }
+  ImageAnalysisData._() : super();
+  factory ImageAnalysisData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageAnalysisData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ImageAnalysisData', createEmptyInstance: create)
+    ..pc<ImageAnalysisObject>(1, _omitFieldNames ? '' : 'objects', $pb.PbFieldType.PM, subBuilder: ImageAnalysisObject.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisData clone() => ImageAnalysisData()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisData copyWith(void Function(ImageAnalysisData) updates) => super.copyWith((message) => updates(message as ImageAnalysisData)) as ImageAnalysisData;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisData create() => ImageAnalysisData._();
+  ImageAnalysisData createEmptyInstance() => create();
+  static $pb.PbList<ImageAnalysisData> createRepeated() => $pb.PbList<ImageAnalysisData>();
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageAnalysisData>(create);
+  static ImageAnalysisData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ImageAnalysisObject> get objects => $_getList(0);
+}
+
+class ImageAnalysisObject extends $pb.GeneratedMessage {
+  factory ImageAnalysisObject({
+    $core.String? name,
+    ImageAnalysisCoordinates? topLeft,
+    ImageAnalysisCoordinates? bottomRight,
+  }) {
+    final $result = create();
+    if (name != null) {
+      $result.name = name;
+    }
+    if (topLeft != null) {
+      $result.topLeft = topLeft;
+    }
+    if (bottomRight != null) {
+      $result.bottomRight = bottomRight;
+    }
+    return $result;
+  }
+  ImageAnalysisObject._() : super();
+  factory ImageAnalysisObject.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageAnalysisObject.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ImageAnalysisObject', createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOM<ImageAnalysisCoordinates>(2, _omitFieldNames ? '' : 'topLeft', subBuilder: ImageAnalysisCoordinates.create)
+    ..aOM<ImageAnalysisCoordinates>(3, _omitFieldNames ? '' : 'bottomRight', subBuilder: ImageAnalysisCoordinates.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisObject clone() => ImageAnalysisObject()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisObject copyWith(void Function(ImageAnalysisObject) updates) => super.copyWith((message) => updates(message as ImageAnalysisObject)) as ImageAnalysisObject;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisObject create() => ImageAnalysisObject._();
+  ImageAnalysisObject createEmptyInstance() => create();
+  static $pb.PbList<ImageAnalysisObject> createRepeated() => $pb.PbList<ImageAnalysisObject>();
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisObject getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageAnalysisObject>(create);
+  static ImageAnalysisObject? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  ImageAnalysisCoordinates get topLeft => $_getN(1);
+  @$pb.TagNumber(2)
+  set topLeft(ImageAnalysisCoordinates v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTopLeft() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTopLeft() => clearField(2);
+  @$pb.TagNumber(2)
+  ImageAnalysisCoordinates ensureTopLeft() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  ImageAnalysisCoordinates get bottomRight => $_getN(2);
+  @$pb.TagNumber(3)
+  set bottomRight(ImageAnalysisCoordinates v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasBottomRight() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBottomRight() => clearField(3);
+  @$pb.TagNumber(3)
+  ImageAnalysisCoordinates ensureBottomRight() => $_ensure(2);
+}
+
+class ImageAnalysisCoordinates extends $pb.GeneratedMessage {
+  factory ImageAnalysisCoordinates({
+    $core.int? x,
+    $core.int? y,
+  }) {
+    final $result = create();
+    if (x != null) {
+      $result.x = x;
+    }
+    if (y != null) {
+      $result.y = y;
+    }
+    return $result;
+  }
+  ImageAnalysisCoordinates._() : super();
+  factory ImageAnalysisCoordinates.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageAnalysisCoordinates.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ImageAnalysisCoordinates', createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'x', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'y', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisCoordinates clone() => ImageAnalysisCoordinates()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageAnalysisCoordinates copyWith(void Function(ImageAnalysisCoordinates) updates) => super.copyWith((message) => updates(message as ImageAnalysisCoordinates)) as ImageAnalysisCoordinates;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisCoordinates create() => ImageAnalysisCoordinates._();
+  ImageAnalysisCoordinates createEmptyInstance() => create();
+  static $pb.PbList<ImageAnalysisCoordinates> createRepeated() => $pb.PbList<ImageAnalysisCoordinates>();
+  @$core.pragma('dart2js:noInline')
+  static ImageAnalysisCoordinates getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageAnalysisCoordinates>(create);
+  static ImageAnalysisCoordinates? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get x => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set x($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasX() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearX() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get y => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set y($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasY() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearY() => clearField(2);
 }
 
 
