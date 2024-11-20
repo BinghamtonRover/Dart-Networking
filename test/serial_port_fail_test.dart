@@ -10,9 +10,8 @@ const readInterval = Duration(milliseconds: 100);
 void main() async {
   Logger.level = LogLevel.off;
   final logger = BurtLogger();
-  SerialPortInterface.factory = FailingSerialPort.new;  
-  final device = SerialDevice(logger: logger, portName: "portName", readInterval: readInterval);
-  SerialPortInterface.factory = DelegateSerialPort.new;  
+  final port = FailingSerialPort("portName");
+  final device = SerialDevice.fromPort(port, logger: logger, readInterval: readInterval);
 
   group("Failing Serial port", () {
     setUp(device.init);

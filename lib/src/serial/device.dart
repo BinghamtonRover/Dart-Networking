@@ -11,8 +11,6 @@ import "package:burt_network/burt_network.dart";
 /// - Listen to [stream] to get incoming data
 /// - Call [dispose] to close the port
 class SerialDevice extends Service {
-  /// The port to connect to.
-	final String portName;
 	/// How often to read from the port.
 	final Duration readInterval;
   /// The underlying connection to the serial port.
@@ -26,13 +24,19 @@ class SerialDevice extends Service {
 	/// The controller for [stream].
 	final _controller = StreamController<Uint8List>.broadcast();
 
-	/// Manages a connection to a serial device.
+	/// Opens a new serial connection with the given port name and baud rate.
 	SerialDevice({
-    required this.portName,
+    required String portName,
 		required this.readInterval,
     required this.logger,
-	}) : _port = SerialPortInterface.factory(portName);
+    int baudRate = 9600,
+	}) : _port = DelegateSerialPort(portName, baudRate: baudRate);
 
+  /// Opens a serial connection on the given port.
+  SerialDevice.fromPort(this._port, {required this.readInterval, required this.logger});
+
+  /// The name of the port to connect to.
+  String get portName => _port.portName;
 
 	/// Whether the port is open (ie, the device is connected).
 	bool get isOpen => _port.isOpen;

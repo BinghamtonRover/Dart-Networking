@@ -8,20 +8,24 @@ import "port_interface.dart";
 class DelegateSerialPort extends SerialPortInterface {
 	/// A list of all available ports on the device.
 	static List<String> get allPorts => SerialPort.availablePorts;
-  
+
   SerialPort? _delegate;
 
   /// Creates a serial port that delegates to the `libserialport` package.
-  DelegateSerialPort(super.portName);
+  DelegateSerialPort(super.portName, {super.baudRate});
 
   @override
   bool get isOpen => _delegate?.isOpen ?? false;
-  
+
   @override
   Future<bool> init() async {
-    try { 
+    try {
       _delegate = SerialPort(portName);
-      return _delegate!.openReadWrite();
+      final result = _delegate!.openReadWrite();
+      final config = SerialPortConfig()..baudRate = baudRate;
+      _delegate!.config = config;
+      config.dispose();
+      return result;
     } catch (error) {
       return false;
     }
@@ -29,13 +33,13 @@ class DelegateSerialPort extends SerialPortInterface {
 
   @override
   int get bytesAvailable => _delegate?.bytesAvailable ?? 0;
-  
+
   @override
   Uint8List read(int count) => _delegate?.read(count) ?? Uint8List.fromList([]);
-  
+
   @override
   void write(Uint8List bytes) => _delegate?.write(bytes);
-  
+
   @override
   Future<void> dispose() async {
     if (!isOpen) return;

@@ -24,6 +24,7 @@ class BurtFirmwareSerial extends Service {
     portName: port,
     readInterval: readInterval,
     logger: logger,
+    baudRate: baudRate,
   );
 
   /// The port this device is attached to.
@@ -32,8 +33,11 @@ class BurtFirmwareSerial extends Service {
   /// The logger to use.
   final BurtLogger logger;
 
+  /// The baud rate for the underlying [SerialDevice].
+  final int baudRate;
+
   /// Creates a firmware device at the given serial port.
-  BurtFirmwareSerial({required this.port, required this.logger});
+  BurtFirmwareSerial({required this.port, required this.logger, this.baudRate = 9600});
 
   /// The stream of raw data coming from this device.
   Stream<Uint8List> get rawStream => _serial.stream;
