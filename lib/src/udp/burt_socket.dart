@@ -85,9 +85,8 @@ abstract class BurtSocket extends UdpSocket {
     } else if (wrapper.name == UpdateSetting().messageName) {
       final settings = UpdateSetting.fromBuffer(wrapper.data);
       onSettings(settings);
-    } else {
-      _controller.add(wrapper);
     }
+    _controller.add(wrapper);
   }
 
   /// Handle an incoming heartbeat coming from a given source.
