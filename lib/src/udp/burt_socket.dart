@@ -88,7 +88,6 @@ abstract class BurtSocket extends UdpSocket {
   Future<bool> tryHandshake<T extends Message>({
     required T message,
     required Duration timeout,
-    required String messageName,
     required T Function(List<int> bytes) constructor,
   }) {
     sendMessage(message);
@@ -97,7 +96,7 @@ abstract class BurtSocket extends UdpSocket {
     late StreamSubscription<T> subscription;
 
     subscription = messages.onMessage(
-      name: messageName,
+      name: message.messageName,
       constructor: constructor,
       callback: (handshake) {
         completer.complete(true);
