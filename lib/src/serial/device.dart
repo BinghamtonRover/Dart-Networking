@@ -48,11 +48,12 @@ class SerialDevice extends Service {
   @override
 	Future<bool> init() async {
     if (_controller.isClosed) throw StateError("A SerialDevice cannot be used after closeStream() is called");
-    if (!await _port.init()) {
-      logger.warning("Could not open port $portName");
-      return false;
-    }
-    return true;
+    var result = false;
+    try {
+      result = await _port.init();
+    } catch (error) { /* Ignore, log below */ }
+    if (!result) logger.warning("Could not open serial port $portName");
+    return result;
   }
 
   /// Starts listening to data sent over the serial port via [stream].
@@ -67,17 +68,14 @@ class SerialDevice extends Service {
       return _port.read(count ?? _port.bytesAvailable);
     } catch (error) {
       logger.error("Serial device on $portName has suddenly disconnected");
-      dispose();
+      stopListening();
+      _port.dispose(isDisconnected: true);
       return Uint8List(0);
     }
   }
 
 	/// Reads any data from the port and adds it to the [stream].
 	void _checkForBytes(_) {
-    if (!isOpen) {
-      // logger.warning("Serial port $portName has suddenly disconnected");
-      // return;
-    }
     final bytes = readBytes();
     if (bytes.isEmpty) return;
     _controller.add(bytes);
