@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'version.pb.dart' as $0;
+import 'version.pb.dart' as $2;
 
 class GpsCoordinates extends $pb.GeneratedMessage {
   factory GpsCoordinates({
@@ -176,7 +176,6 @@ class RoverPosition extends $pb.GeneratedMessage {
     GpsCoordinates? gps,
     Orientation? orientation,
     $0.Version? version,
-    $core.List<$core.int>? rtkMessage,
   }) {
     final $result = create();
     if (gps != null) {
@@ -201,7 +200,6 @@ class RoverPosition extends $pb.GeneratedMessage {
     ..aOM<GpsCoordinates>(1, _omitFieldNames ? '' : 'gps', subBuilder: GpsCoordinates.create)
     ..aOM<Orientation>(2, _omitFieldNames ? '' : 'orientation', subBuilder: Orientation.create)
     ..aOM<$0.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
-    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'rtkMessage', $pb.PbFieldType.OY, protoName: 'rtkMessage')
     ..hasRequiredFields = false
   ;
 
@@ -249,24 +247,15 @@ class RoverPosition extends $pb.GeneratedMessage {
   Orientation ensureOrientation() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $0.Version get version => $_getN(2);
+  $2.Version get version => $_getN(2);
   @$pb.TagNumber(3)
-  set version($0.Version v) { setField(3, v); }
+  set version($2.Version v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasVersion() => $_has(2);
   @$pb.TagNumber(3)
   void clearVersion() => clearField(3);
   @$pb.TagNumber(3)
   $0.Version ensureVersion() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.List<$core.int> get rtkMessage => $_getN(3);
-  @$pb.TagNumber(4)
-  set rtkMessage($core.List<$core.int> v) { $_setBytes(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasRtkMessage() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearRtkMessage() => clearField(4);
 }
 
 
