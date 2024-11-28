@@ -11,7 +11,7 @@ class FailingSerialPort extends SerialPortInterface {
   @override Future<bool> init() => throw UnsupportedError("Test port cannot open");
   @override Uint8List read(int count) => throw UnsupportedError("Test port cannot read");
 
-  @override Future<void> dispose({bool isDisconnected = false}) async { }
+  @override Future<void> dispose({bool isSafe = true}) async { }
   @override bool write(Uint8List bytes) => throw UnsupportedError("Test port cannot write");
 }
 
@@ -21,16 +21,21 @@ class DisconnectedSerialPort extends SerialPortInterface {
   var _shouldFail = false;
   var _isOpen = false;
 
-  @override bool get isOpen => _isOpen;
-  @override int get bytesAvailable => 4;
+  @override
+  bool get isOpen => _isOpen;
 
-  @override Future<bool> init() async {
+  @override
+  int get bytesAvailable => 4;
+
+  @override
+  Future<bool> init() async {
     _shouldFail = false;
     _isOpen = true;
     return true;
   }
 
-  @override Uint8List read(int count) {
+  @override
+  Uint8List read(int count) {
     if (_shouldFail) {
       throw Exception("The device was suddenly unplugged!");
     } else {
@@ -39,10 +44,12 @@ class DisconnectedSerialPort extends SerialPortInterface {
     }
   }
 
-  @override Future<void> dispose({bool isDisconnected = false}) async {
+  @override
+  Future<void> dispose({bool isSafe = true}) async {
     _isOpen = false;
-    if (_shouldFail && !isDisconnected) throw Exception("You shouldn't try to call dispose");
+    if (_shouldFail && isSafe) throw Exception("You shouldn't try to call dispose");
   }
 
-  @override bool write(Uint8List bytes) => true;
+  @override
+  bool write(Uint8List bytes) => true;
 }

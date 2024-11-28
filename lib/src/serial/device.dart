@@ -69,7 +69,7 @@ class SerialDevice extends Service {
     } catch (error) {
       logger.error("Serial device on $portName has suddenly disconnected");
       stopListening();
-      _port.dispose(isDisconnected: true);
+      _port.dispose(isSafe: false);
       return Uint8List(0);
     }
   }
@@ -84,7 +84,7 @@ class SerialDevice extends Service {
   @override
 	Future<void> dispose() async {
     _timer?.cancel();
-		await _port.dispose(isDisconnected: !isOpen);
+		await _port.dispose(isSafe: isOpen);
 	}
 
   /// Closes the [stream] so it cannot be listened to.

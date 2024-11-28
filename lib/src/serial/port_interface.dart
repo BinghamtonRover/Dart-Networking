@@ -28,5 +28,5 @@ abstract class SerialPortInterface extends Service {
   void write(Uint8List bytes);
 
   @override
-  Future<void> dispose({bool isDisconnected = false});
+  Future<void> dispose({bool isSafe = true});
 }
