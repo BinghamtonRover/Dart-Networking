@@ -117,6 +117,7 @@ abstract class BurtSocket extends UdpSocket {
   void onConnect(SocketInfo source) {
     destination = source;
     _connectionCompleter?.complete();
+    _connectionCompleter = null;  // to avoid completing twice
     logger.info("Port $port is connected to $source");
   }
 
