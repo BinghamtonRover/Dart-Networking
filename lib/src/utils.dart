@@ -48,29 +48,36 @@ String? deviceToDataName(Device device) => switch (device) {
   _ => null,
 };
 
-/// Helpful extension methods to convert GpsCoordinates into meters
-extension GpsCoordinatesToMeters on GpsCoordinates {
+/// Helpful extension methods to convert [GpsCoordinates] into meters
+extension GpsToMeters on GpsCoordinates {
   /// Number of meters per degree of latitude
   static const metersPerLatitude = 111.32 * 1000;
+  /// Number of radians per degree.
+  static const radiansPerDegree = pi / 180;
 
-  /// Converts GpsCoordinates into meters
-  (num longitudeMeters, num latitudeMeters) get inMeters {
-    final metersPerLongitude = 40075 * cos(latitude * (pi / 180)) / 360 * 1000;
-    return (latitude * metersPerLatitude, longitude * metersPerLongitude);
-  }
+  /// Number of meters per degree longitude at the given latitude.
+  ///
+  /// While the distance between rings of latitude remains constant all over the Earth, rings of
+  /// longitude stretch as you near the equator, and come to a single point at the poles. For that
+  /// reason, we need to calculate this number based on your current latitude.
+  ///
+  /// Source: https://stackoverflow.com/a/39540339/9392211
+  static double metersPerLongitude(double latitude) =>
+    40075 * cos(latitude * radiansPerDegree ) / 360 * 1000;
+
+  /// Converts [GpsCoordinates] into (lat, long) in meters.
+  ({double lat, double long}) get inMeters => (
+    lat: latitude * metersPerLatitude,
+    long: longitude * metersPerLongitude(latitude),
+  );
 }
 
-/// Extension to convert coordinates in meters into Gps Coordinates
-extension MeterRecordToGps on (num, num) {
-  /// Convert a record of 2 doubles (which represent longitude and latitude coordinates) into Gps Coordinates
-  GpsCoordinates get toGpsCoordinates {
-    final latitude = $1 / GpsCoordinatesToMeters.metersPerLatitude;
-    final metersPerLongitude = 40075 * cos(latitude * (pi / 180)) / 360 * 1000;
-    return GpsCoordinates(latitude: latitude, longitude: $2 / metersPerLongitude);
+/// Extension to convert coordinates in meters into [GpsCoordinates].
+extension MetersToGps on ({num lat, num long}) {
+  /// Convert a record of (lat, long) in meters into [GpsCoordinates].
+  GpsCoordinates toGps() {
+    final degreeLatitude = lat / GpsToMeters.metersPerLatitude;
+    final degreeLongitude = long / GpsToMeters.metersPerLongitude(degreeLatitude);
+    return GpsCoordinates(latitude: degreeLatitude, longitude: degreeLongitude);
   }
-
-  /// Convert a record of 2 doubles (which represent longitude and latitude coordinates) into Gps Coordinates
-  /// 
-  /// Alias for [MeterRecordToGps.toGpsCoordinates]
-  GpsCoordinates toGps() => toGpsCoordinates;
 }
