@@ -19,11 +19,17 @@ class DisconnectedSerialPort extends SerialPortInterface {
   DisconnectedSerialPort(super.portName);
 
   var _shouldFail = false;
+  var _isOpen = false;
 
-  @override bool get isOpen => !_shouldFail;
+  @override bool get isOpen => _isOpen;
   @override int get bytesAvailable => 4;
 
-  @override Future<bool> init() async => true;
+  @override Future<bool> init() async {
+    _shouldFail = false;
+    _isOpen = true;
+    return true;
+  }
+
   @override Uint8List read(int count) {
     if (_shouldFail) {
       throw Exception("The device was suddenly unplugged!");
@@ -34,7 +40,9 @@ class DisconnectedSerialPort extends SerialPortInterface {
   }
 
   @override Future<void> dispose({bool isDisconnected = false}) async {
+    _isOpen = false;
     if (_shouldFail && !isDisconnected) throw Exception("You shouldn't try to call dispose");
   }
+
   @override bool write(Uint8List bytes) => true;
 }

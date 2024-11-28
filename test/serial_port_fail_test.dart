@@ -10,10 +10,10 @@ const readInterval = Duration(milliseconds: 100);
 void main() async {
   Logger.level = LogLevel.off;
   final logger = BurtLogger();
-  final port = FailingSerialPort("portName");
-  final device = SerialDevice.fromPort(port, logger: logger, readInterval: readInterval);
 
   group("Failing Serial port", () {
+    final port = FailingSerialPort("portName");
+    final device = SerialDevice.fromPort(port, logger: logger, readInterval: readInterval);
     setUp(device.init);
     tearDown(device.dispose);
 
@@ -49,41 +49,38 @@ void main() async {
     });
   });
 
-  test("Device can handle being suddenly disconnected: read()", () async {
+  group("Suddenly disconnected port", () {
     final port = DisconnectedSerialPort("portName");
-    final device = SerialDevice.fromPort(port, readInterval: readInterval, logger: logger);
-    await device.init();
-    expect(device.isOpen, true);
-    expect(device.readBytes(), Uint8List.fromList([1, 2, 3, 4]));
-    expect(device.isOpen, false);
-    expect(device.readBytes().isEmpty, true);
-  });
+    final device = SerialDevice.fromPort(port, logger: logger, readInterval: readInterval);
+    setUp(device.init);
+    tearDown(device.dispose);
 
-  test("Device can handle being suddenly disconnected: stream", () async {
-    final port = DisconnectedSerialPort("portName");
-    final device = SerialDevice.fromPort(port, readInterval: readInterval, logger: logger);
-    final sub = device.stream.listen((_) { });
-    await device.init();
-    expect(device.isOpen, true);
-    device.startListening();
-    await Future<void>.delayed(const Duration(seconds: 1));
-    expect(device.isOpen, false);
-    await device.closeStream();
-    await device.dispose();
-    await sub.cancel();
-  });
+    test("can handle being suddenly disconnected: read()", () async {
+      expect(device.isOpen, true);
+      expect(device.readBytes(), Uint8List.fromList([1, 2, 3, 4]));
+      expect(device.isOpen, true);
+      expect(device.readBytes().isEmpty, true);
+      expect(device.isOpen, false);
+    });
 
-  test("Failing device does not try to call dispose", () async {
-    final port = DisconnectedSerialPort("portName");
-    final device = SerialDevice.fromPort(port, readInterval: readInterval, logger: logger);
-    final sub = device.stream.listen((_) { });
-    await device.init();
-    expect(device.isOpen, true);
-    device.startListening();
-    await Future<void>.delayed(const Duration(seconds: 1));
-    expect(device.isOpen, false);
-    await device.closeStream();
-    await device.dispose();
-    await sub.cancel();
+    test("can handle being suddenly disconnected: stream", () async {
+      final sub = device.stream.listen((_) { });
+      expect(device.isOpen, true);
+      device.startListening();
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+      expect(device.isOpen, false);
+      await device.dispose();
+      await sub.cancel();
+    });
+
+    test("does not try to call dispose", () async {
+      final sub = device.stream.listen((_) { });
+      expect(device.isOpen, true);
+      device.startListening();
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+      expect(device.isOpen, false);
+      await device.dispose();
+      await sub.cancel();
+    });
   });
 }
