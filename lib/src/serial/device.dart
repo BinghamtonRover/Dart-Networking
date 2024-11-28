@@ -2,6 +2,7 @@ import "dart:async";
 import "dart:typed_data";
 
 import "package:burt_network/burt_network.dart";
+import "package:libserialport/libserialport.dart";
 
 /// A wrapper around the `package:libserialport` library.
 ///
@@ -11,6 +12,9 @@ import "package:burt_network/burt_network.dart";
 /// - Listen to [stream] to get incoming data
 /// - Call [dispose] to close the port
 class SerialDevice extends Service {
+  /// All available ports on this device.
+  static List<String> get allPorts => SerialPort.availablePorts;
+
 	/// How often to read from the port.
 	final Duration readInterval;
   /// The underlying connection to the serial port.
@@ -44,12 +48,11 @@ class SerialDevice extends Service {
   @override
 	Future<bool> init() async {
     if (_controller.isClosed) throw StateError("A SerialDevice cannot be used after shutdown() is called");
-    try {
-      return await _port.init();
-    } catch (error) {
-      logger.warning("Could not open port $portName", body: "$error");
+    if (!await _port.init()) {
+      logger.warning("Could not open port $portName");
       return false;
     }
+    return true;
   }
 
   /// Starts listening to data sent over the serial port via [stream].
