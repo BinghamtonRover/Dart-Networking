@@ -13,6 +13,20 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use rTKModeDescriptor instead')
+const RTKMode$json = {
+  '1': 'RTKMode',
+  '2': [
+    {'1': 'RTK_NONE', '2': 0},
+    {'1': 'RTK_FLOAT', '2': 1},
+    {'1': 'RTK_FIXED', '2': 2},
+  ],
+};
+
+/// Descriptor for `RTKMode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List rTKModeDescriptor = $convert.base64Decode(
+    'CgdSVEtNb2RlEgwKCFJUS19OT05FEAASDQoJUlRLX0ZMT0FUEAESDQoJUlRLX0ZJWEVEEAI=');
+
 @$core.Deprecated('Use gpsCoordinatesDescriptor instead')
 const GpsCoordinates$json = {
   '1': 'GpsCoordinates',
@@ -20,13 +34,15 @@ const GpsCoordinates$json = {
     {'1': 'latitude', '3': 1, '4': 1, '5': 1, '10': 'latitude'},
     {'1': 'longitude', '3': 2, '4': 1, '5': 1, '10': 'longitude'},
     {'1': 'altitude', '3': 3, '4': 1, '5': 1, '10': 'altitude'},
+    {'1': 'rtkMode', '3': 4, '4': 1, '5': 14, '6': '.RTKMode', '10': 'rtkMode'},
   ],
 };
 
 /// Descriptor for `GpsCoordinates`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List gpsCoordinatesDescriptor = $convert.base64Decode(
     'Cg5HcHNDb29yZGluYXRlcxIaCghsYXRpdHVkZRgBIAEoAVIIbGF0aXR1ZGUSHAoJbG9uZ2l0dW'
-    'RlGAIgASgBUglsb25naXR1ZGUSGgoIYWx0aXR1ZGUYAyABKAFSCGFsdGl0dWRl');
+    'RlGAIgASgBUglsb25naXR1ZGUSGgoIYWx0aXR1ZGUYAyABKAFSCGFsdGl0dWRlEiIKB3J0a01v'
+    'ZGUYBCABKA4yCC5SVEtNb2RlUgdydGtNb2Rl');
 
 @$core.Deprecated('Use orientationDescriptor instead')
 const Orientation$json = {

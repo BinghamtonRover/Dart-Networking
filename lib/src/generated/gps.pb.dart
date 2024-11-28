@@ -13,13 +13,17 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'gps.pbenum.dart';
 import 'version.pb.dart' as $2;
+
+export 'gps.pbenum.dart';
 
 class GpsCoordinates extends $pb.GeneratedMessage {
   factory GpsCoordinates({
     $core.double? latitude,
     $core.double? longitude,
     $core.double? altitude,
+    RTKMode? rtkMode,
   }) {
     final $result = create();
     if (latitude != null) {
@@ -31,6 +35,9 @@ class GpsCoordinates extends $pb.GeneratedMessage {
     if (altitude != null) {
       $result.altitude = altitude;
     }
+    if (rtkMode != null) {
+      $result.rtkMode = rtkMode;
+    }
     return $result;
   }
   GpsCoordinates._() : super();
@@ -41,6 +48,7 @@ class GpsCoordinates extends $pb.GeneratedMessage {
     ..a<$core.double>(1, _omitFieldNames ? '' : 'latitude', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'longitude', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'altitude', $pb.PbFieldType.OD)
+    ..e<RTKMode>(4, _omitFieldNames ? '' : 'rtkMode', $pb.PbFieldType.OE, protoName: 'rtkMode', defaultOrMaker: RTKMode.RTK_NONE, valueOf: RTKMode.valueOf, enumValues: RTKMode.values)
     ..hasRequiredFields = false
   ;
 
@@ -91,6 +99,15 @@ class GpsCoordinates extends $pb.GeneratedMessage {
   $core.bool hasAltitude() => $_has(2);
   @$pb.TagNumber(3)
   void clearAltitude() => clearField(3);
+
+  @$pb.TagNumber(4)
+  RTKMode get rtkMode => $_getN(3);
+  @$pb.TagNumber(4)
+  set rtkMode(RTKMode v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRtkMode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRtkMode() => clearField(4);
 }
 
 class Orientation extends $pb.GeneratedMessage {
