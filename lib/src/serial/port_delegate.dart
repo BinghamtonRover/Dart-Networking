@@ -41,9 +41,12 @@ class DelegateSerialPort extends SerialPortInterface {
   void write(Uint8List bytes) => _delegate?.write(bytes);
 
   @override
-  Future<void> dispose() async {
+  Future<void> dispose({bool isDisconnected = false}) async {
     if (!isOpen) return;
-    _delegate?.close();
-    _delegate?.dispose();
+    if (!isDisconnected) {
+      _delegate?.close();
+      _delegate?.dispose();
+    }
+    _delegate = null;
   }
 }

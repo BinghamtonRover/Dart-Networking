@@ -47,7 +47,7 @@ class SerialDevice extends Service {
 
   @override
 	Future<bool> init() async {
-    if (_controller.isClosed) throw StateError("A SerialDevice cannot be used after shutdown() is called");
+    if (_controller.isClosed) throw StateError("A SerialDevice cannot be used after closeStream() is called");
     if (!await _port.init()) {
       logger.warning("Could not open port $portName");
       return false;
@@ -66,27 +66,27 @@ class SerialDevice extends Service {
     try {
       return _port.read(count ?? _port.bytesAvailable);
     } catch (error) {
-      logger.error("Could not read from serial port $portName:\n  $error");
+      logger.error("Serial device on $portName has suddenly disconnected");
+      dispose();
       return Uint8List(0);
     }
   }
 
 	/// Reads any data from the port and adds it to the [stream].
 	void _checkForBytes(_) {
-		try {
-      final bytes = readBytes();
-      if (bytes.isEmpty) return;
-      _controller.add(bytes);
-		} catch (error) {
-      logger.critical("Could not read $portName", body: error.toString());
-      dispose();
-		}
+    if (!isOpen) {
+      // logger.warning("Serial port $portName has suddenly disconnected");
+      // return;
+    }
+    final bytes = readBytes();
+    if (bytes.isEmpty) return;
+    _controller.add(bytes);
 	}
 
   @override
 	Future<void> dispose() async {
     _timer?.cancel();
-		await _port.dispose();
+		await _port.dispose(isDisconnected: !isOpen);
 	}
 
   /// Closes the [stream] so it cannot be listened to.
