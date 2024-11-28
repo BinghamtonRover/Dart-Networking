@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: mars.proto
+//  source: base_station.proto
 //
 // @dart = 2.12
 
@@ -13,17 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// / How the antenna is being controller.
 class AntennaControlMode extends $pb.ProtobufEnum {
   static const AntennaControlMode ANTENNA_CONTROL_MODE_UNDEFINED = AntennaControlMode._(0, _omitEnumNames ? '' : 'ANTENNA_CONTROL_MODE_UNDEFINED');
   static const AntennaControlMode TRACK_ROVER = AntennaControlMode._(1, _omitEnumNames ? '' : 'TRACK_ROVER');
-  static const AntennaControlMode MANUAL_SPEED = AntennaControlMode._(2, _omitEnumNames ? '' : 'MANUAL_SPEED');
-  static const AntennaControlMode STOP_ANTENNA = AntennaControlMode._(3, _omitEnumNames ? '' : 'STOP_ANTENNA');
+  static const AntennaControlMode MANUAL_CONTROL = AntennaControlMode._(2, _omitEnumNames ? '' : 'MANUAL_CONTROL');
 
   static const $core.List<AntennaControlMode> values = <AntennaControlMode> [
     ANTENNA_CONTROL_MODE_UNDEFINED,
     TRACK_ROVER,
-    MANUAL_SPEED,
-    STOP_ANTENNA,
+    MANUAL_CONTROL,
   ];
 
   static final $core.Map<$core.int, AntennaControlMode> _byValue = $pb.ProtobufEnum.initByValue(values);
