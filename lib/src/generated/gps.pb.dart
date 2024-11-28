@@ -175,7 +175,8 @@ class RoverPosition extends $pb.GeneratedMessage {
   factory RoverPosition({
     GpsCoordinates? gps,
     Orientation? orientation,
-    $0.Version? version,
+    $2.Version? version,
+    $core.List<$core.int>? rtkMessage,
   }) {
     final $result = create();
     if (gps != null) {
@@ -199,7 +200,8 @@ class RoverPosition extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RoverPosition', createEmptyInstance: create)
     ..aOM<GpsCoordinates>(1, _omitFieldNames ? '' : 'gps', subBuilder: GpsCoordinates.create)
     ..aOM<Orientation>(2, _omitFieldNames ? '' : 'orientation', subBuilder: Orientation.create)
-    ..aOM<$0.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..aOM<$2.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $2.Version.create)
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'rtkMessage', $pb.PbFieldType.OY, protoName: 'rtkMessage')
     ..hasRequiredFields = false
   ;
 
@@ -255,7 +257,16 @@ class RoverPosition extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearVersion() => clearField(3);
   @$pb.TagNumber(3)
-  $0.Version ensureVersion() => $_ensure(2);
+  $2.Version ensureVersion() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get rtkMessage => $_getN(3);
+  @$pb.TagNumber(4)
+  set rtkMessage($core.List<$core.int> v) { $_setBytes(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRtkMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRtkMessage() => clearField(4);
 }
 
 
