@@ -49,9 +49,22 @@ class UdpSocket extends Service {
   /// is the default destination if those parameters are omitted.
   SocketInfo? destination;
 
+  /// Whether or not the default destination should be kept when the socket is dispose.
+  /// 
+  /// If this is true, [destination] will not be set to null when [dispose] is called.
+  /// 
+  /// This is intended to prevent scenarios where the socket automatically restarts due
+  /// to an allowed OS error (see [allowedErrors]), and the socket's destination can no
+  /// longer receive messages by this socket due to [destination] being set null.
+  final bool keepDestination;
+
   /// Opens a UDP socket on the given port that can send and receive data.
-  UdpSocket({required int? port, this.quiet = false, this.destination}) :
-    _port = port;
+  UdpSocket({
+    required int? port,
+    this.quiet = false,
+    this.destination,
+    this.keepDestination = false,
+  }) : _port = port;
 
   /// The UDP socket backed by `dart:io`.
   ///
@@ -103,7 +116,9 @@ class UdpSocket extends Service {
     if (!quiet) logger.info("Closing the socket on port $port");
     await _subscription?.cancel(); _subscription = null;
     _socket?.close(); _socket = null;
-    destination = null;
+    if (!keepDestination) {
+      destination = null;
+    }
   }
 
   /// Sends data to the given destination.
