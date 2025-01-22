@@ -13,6 +13,7 @@ export "src/generated/logs.pb.dart";
 export "src/generated/motor.pb.dart";
 export "src/generated/status.pb.dart";
 export "src/generated/science.pb.dart";
+export "src/generated/subsystems.pb.dart";
 export "src/generated/utils.pb.dart";
 export "src/generated/version.pb.dart";
 export "src/generated/video.pb.dart";
