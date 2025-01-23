@@ -17,11 +17,11 @@ import 'dart:typed_data' as $typed_data;
 const SubsystemsCommand$json = {
   '1': 'SubsystemsCommand',
   '2': [
-    {'1': 'zeroGyro', '3': 1, '4': 1, '5': 8, '10': 'zeroGyro'},
+    {'1': 'zeroIMU', '3': 1, '4': 1, '5': 8, '10': 'zeroIMU'},
   ],
 };
 
 /// Descriptor for `SubsystemsCommand`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List subsystemsCommandDescriptor = $convert.base64Decode(
-    'ChFTdWJzeXN0ZW1zQ29tbWFuZBIaCgh6ZXJvR3lybxgBIAEoCFIIemVyb0d5cm8=');
+    'ChFTdWJzeXN0ZW1zQ29tbWFuZBIYCgd6ZXJvSU1VGAEgASgIUgd6ZXJvSU1V');
 

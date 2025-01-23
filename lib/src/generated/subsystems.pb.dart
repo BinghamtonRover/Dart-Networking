@@ -15,11 +15,11 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class SubsystemsCommand extends $pb.GeneratedMessage {
   factory SubsystemsCommand({
-    $core.bool? zeroGyro,
+    $core.bool? zeroIMU,
   }) {
     final $result = create();
-    if (zeroGyro != null) {
-      $result.zeroGyro = zeroGyro;
+    if (zeroIMU != null) {
+      $result.zeroIMU = zeroIMU;
     }
     return $result;
   }
@@ -28,7 +28,7 @@ class SubsystemsCommand extends $pb.GeneratedMessage {
   factory SubsystemsCommand.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubsystemsCommand', createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'zeroGyro', protoName: 'zeroGyro')
+    ..aOB(1, _omitFieldNames ? '' : 'zeroIMU', protoName: 'zeroIMU')
     ..hasRequiredFields = false
   ;
 
@@ -54,13 +54,13 @@ class SubsystemsCommand extends $pb.GeneratedMessage {
   static SubsystemsCommand? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get zeroGyro => $_getBF(0);
+  $core.bool get zeroIMU => $_getBF(0);
   @$pb.TagNumber(1)
-  set zeroGyro($core.bool v) { $_setBool(0, v); }
+  set zeroIMU($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasZeroGyro() => $_has(0);
+  $core.bool hasZeroIMU() => $_has(0);
   @$pb.TagNumber(1)
-  void clearZeroGyro() => clearField(1);
+  void clearZeroIMU() => clearField(1);
 }
 
 
