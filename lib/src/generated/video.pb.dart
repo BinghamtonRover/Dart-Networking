@@ -13,8 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'utils.pbenum.dart' as $1;
-import 'version.pb.dart' as $0;
+import 'version.pb.dart' as $3;
 import 'video.pbenum.dart';
 
 export 'video.pbenum.dart';
@@ -33,6 +32,11 @@ class CameraDetails extends $pb.GeneratedMessage {
     $core.int? pan,
     $core.int? tilt,
     $core.int? focus,
+    $core.double? diagonalFov,
+    $core.double? horizontalFov,
+    $core.double? verticalFov,
+    $core.int? streamWidth,
+    $core.int? streamHeight,
   }) {
     final $result = create();
     if (name != null) {
@@ -68,6 +72,21 @@ class CameraDetails extends $pb.GeneratedMessage {
     if (focus != null) {
       $result.focus = focus;
     }
+    if (diagonalFov != null) {
+      $result.diagonalFov = diagonalFov;
+    }
+    if (horizontalFov != null) {
+      $result.horizontalFov = horizontalFov;
+    }
+    if (verticalFov != null) {
+      $result.verticalFov = verticalFov;
+    }
+    if (streamWidth != null) {
+      $result.streamWidth = streamWidth;
+    }
+    if (streamHeight != null) {
+      $result.streamHeight = streamHeight;
+    }
     return $result;
   }
   CameraDetails._() : super();
@@ -86,6 +105,11 @@ class CameraDetails extends $pb.GeneratedMessage {
     ..a<$core.int>(9, _omitFieldNames ? '' : 'pan', $pb.PbFieldType.O3)
     ..a<$core.int>(10, _omitFieldNames ? '' : 'tilt', $pb.PbFieldType.O3)
     ..a<$core.int>(11, _omitFieldNames ? '' : 'focus', $pb.PbFieldType.O3)
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'diagonalFov', $pb.PbFieldType.OF)
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'horizontalFov', $pb.PbFieldType.OF)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'verticalFov', $pb.PbFieldType.OF)
+    ..a<$core.int>(15, _omitFieldNames ? '' : 'streamWidth', $pb.PbFieldType.O3)
+    ..a<$core.int>(16, _omitFieldNames ? '' : 'streamHeight', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -213,6 +237,53 @@ class CameraDetails extends $pb.GeneratedMessage {
   $core.bool hasFocus() => $_has(10);
   @$pb.TagNumber(11)
   void clearFocus() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.double get diagonalFov => $_getN(11);
+  @$pb.TagNumber(12)
+  set diagonalFov($core.double v) { $_setFloat(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasDiagonalFov() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearDiagonalFov() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.double get horizontalFov => $_getN(12);
+  @$pb.TagNumber(13)
+  set horizontalFov($core.double v) { $_setFloat(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasHorizontalFov() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearHorizontalFov() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.double get verticalFov => $_getN(13);
+  @$pb.TagNumber(14)
+  set verticalFov($core.double v) { $_setFloat(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasVerticalFov() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearVerticalFov() => clearField(14);
+
+  /// / The width of the image data streamed
+  @$pb.TagNumber(15)
+  $core.int get streamWidth => $_getIZ(14);
+  @$pb.TagNumber(15)
+  set streamWidth($core.int v) { $_setSignedInt32(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasStreamWidth() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearStreamWidth() => clearField(15);
+
+  /// / The height of the image data streamed
+  @$pb.TagNumber(16)
+  $core.int get streamHeight => $_getIZ(15);
+  @$pb.TagNumber(16)
+  set streamHeight($core.int v) { $_setSignedInt32(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasStreamHeight() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearStreamHeight() => clearField(16);
 }
 
 /// / Reports data about a camera.
@@ -221,15 +292,8 @@ class VideoData extends $pb.GeneratedMessage {
     $core.String? id,
     CameraDetails? details,
     $core.List<$core.int>? frame,
-    $0.Version? version,
+    $3.Version? version,
     $core.String? imagePath,
-    $1.BoolState? leftObstacle,
-    $1.BoolState? centerObstacle,
-    $1.BoolState? rightObstacle,
-    $1.BoolState? bottomObstacle,
-    $1.BoolState? arucoDetected,
-    $core.double? arucoSize,
-    $core.double? arucoPosition,
   }) {
     final $result = create();
     if (id != null) {
@@ -247,27 +311,6 @@ class VideoData extends $pb.GeneratedMessage {
     if (imagePath != null) {
       $result.imagePath = imagePath;
     }
-    if (leftObstacle != null) {
-      $result.leftObstacle = leftObstacle;
-    }
-    if (centerObstacle != null) {
-      $result.centerObstacle = centerObstacle;
-    }
-    if (rightObstacle != null) {
-      $result.rightObstacle = rightObstacle;
-    }
-    if (bottomObstacle != null) {
-      $result.bottomObstacle = bottomObstacle;
-    }
-    if (arucoDetected != null) {
-      $result.arucoDetected = arucoDetected;
-    }
-    if (arucoSize != null) {
-      $result.arucoSize = arucoSize;
-    }
-    if (arucoPosition != null) {
-      $result.arucoPosition = arucoPosition;
-    }
     return $result;
   }
   VideoData._() : super();
@@ -278,15 +321,8 @@ class VideoData extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<CameraDetails>(2, _omitFieldNames ? '' : 'details', subBuilder: CameraDetails.create)
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'frame', $pb.PbFieldType.OY)
-    ..aOM<$0.Version>(4, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..aOM<$3.Version>(4, _omitFieldNames ? '' : 'version', subBuilder: $3.Version.create)
     ..aOS(5, _omitFieldNames ? '' : 'imagePath', protoName: 'imagePath')
-    ..e<$1.BoolState>(6, _omitFieldNames ? '' : 'leftObstacle', $pb.PbFieldType.OE, protoName: 'leftObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(7, _omitFieldNames ? '' : 'centerObstacle', $pb.PbFieldType.OE, protoName: 'centerObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(8, _omitFieldNames ? '' : 'rightObstacle', $pb.PbFieldType.OE, protoName: 'rightObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(9, _omitFieldNames ? '' : 'bottomObstacle', $pb.PbFieldType.OE, protoName: 'bottomObstacle', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..e<$1.BoolState>(10, _omitFieldNames ? '' : 'arucoDetected', $pb.PbFieldType.OE, protoName: 'arucoDetected', defaultOrMaker: $1.BoolState.BOOL_UNDEFINED, valueOf: $1.BoolState.valueOf, enumValues: $1.BoolState.values)
-    ..a<$core.double>(11, _omitFieldNames ? '' : 'arucoSize', $pb.PbFieldType.OF, protoName: 'arucoSize')
-    ..a<$core.double>(12, _omitFieldNames ? '' : 'arucoPosition', $pb.PbFieldType.OF, protoName: 'arucoPosition')
     ..hasRequiredFields = false
   ;
 
@@ -344,15 +380,15 @@ class VideoData extends $pb.GeneratedMessage {
   void clearFrame() => clearField(3);
 
   @$pb.TagNumber(4)
-  $0.Version get version => $_getN(3);
+  $3.Version get version => $_getN(3);
   @$pb.TagNumber(4)
-  set version($0.Version v) { setField(4, v); }
+  set version($3.Version v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasVersion() => $_has(3);
   @$pb.TagNumber(4)
   void clearVersion() => clearField(4);
   @$pb.TagNumber(4)
-  $0.Version ensureVersion() => $_ensure(3);
+  $3.Version ensureVersion() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get imagePath => $_getSZ(4);
@@ -362,74 +398,6 @@ class VideoData extends $pb.GeneratedMessage {
   $core.bool hasImagePath() => $_has(4);
   @$pb.TagNumber(5)
   void clearImagePath() => clearField(5);
-
-  /// / Data for autonomy to make decisions
-  /// / Is there an obstacle in the way? Yes or No.
-  @$pb.TagNumber(6)
-  $1.BoolState get leftObstacle => $_getN(5);
-  @$pb.TagNumber(6)
-  set leftObstacle($1.BoolState v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasLeftObstacle() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearLeftObstacle() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $1.BoolState get centerObstacle => $_getN(6);
-  @$pb.TagNumber(7)
-  set centerObstacle($1.BoolState v) { setField(7, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasCenterObstacle() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearCenterObstacle() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $1.BoolState get rightObstacle => $_getN(7);
-  @$pb.TagNumber(8)
-  set rightObstacle($1.BoolState v) { setField(8, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasRightObstacle() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearRightObstacle() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $1.BoolState get bottomObstacle => $_getN(8);
-  @$pb.TagNumber(9)
-  set bottomObstacle($1.BoolState v) { setField(9, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasBottomObstacle() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearBottomObstacle() => clearField(9);
-
-  /// Aruco detection state
-  @$pb.TagNumber(10)
-  $1.BoolState get arucoDetected => $_getN(9);
-  @$pb.TagNumber(10)
-  set arucoDetected($1.BoolState v) { setField(10, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasArucoDetected() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearArucoDetected() => clearField(10);
-
-  /// If arucoSize is larger than a certain size (pixels) we have reach it, otherwise head towards it
-  @$pb.TagNumber(11)
-  $core.double get arucoSize => $_getN(10);
-  @$pb.TagNumber(11)
-  set arucoSize($core.double v) { $_setFloat(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasArucoSize() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearArucoSize() => clearField(11);
-
-  /// / Normalized value: -1 to 1, -1 is furthest left, 1 is furthest right
-  @$pb.TagNumber(12)
-  $core.double get arucoPosition => $_getN(11);
-  @$pb.TagNumber(12)
-  set arucoPosition($core.double v) { $_setFloat(11, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasArucoPosition() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearArucoPosition() => clearField(12);
 }
 
 /// / Make changes to a camera feed.
@@ -437,7 +405,7 @@ class VideoCommand extends $pb.GeneratedMessage {
   factory VideoCommand({
     $core.String? id,
     CameraDetails? details,
-    $0.Version? version,
+    $3.Version? version,
     $core.bool? takeSnapshot,
   }) {
     final $result = create();
@@ -462,7 +430,7 @@ class VideoCommand extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VideoCommand', createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<CameraDetails>(2, _omitFieldNames ? '' : 'details', subBuilder: CameraDetails.create)
-    ..aOM<$0.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $0.Version.create)
+    ..aOM<$3.Version>(3, _omitFieldNames ? '' : 'version', subBuilder: $3.Version.create)
     ..aOB(4, _omitFieldNames ? '' : 'takeSnapshot', protoName: 'takeSnapshot')
     ..hasRequiredFields = false
   ;
@@ -513,15 +481,15 @@ class VideoCommand extends $pb.GeneratedMessage {
   CameraDetails ensureDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $0.Version get version => $_getN(2);
+  $3.Version get version => $_getN(2);
   @$pb.TagNumber(3)
-  set version($0.Version v) { setField(3, v); }
+  set version($3.Version v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasVersion() => $_has(2);
   @$pb.TagNumber(3)
   void clearVersion() => clearField(3);
   @$pb.TagNumber(3)
-  $0.Version ensureVersion() => $_ensure(2);
+  $3.Version ensureVersion() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.bool get takeSnapshot => $_getBF(3);

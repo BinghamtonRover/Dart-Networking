@@ -1,6 +1,7 @@
 import "dart:async";
+import "dart:math";
 
-import "package:burt_network/generated.dart";
+import "package:burt_network/protobuf.dart";
 
 /// JSON data as a map.
 typedef Json = Map<String, dynamic>;
@@ -42,5 +43,41 @@ String? deviceToDataName(Device device) => switch (device) {
   Device.DRIVE => DriveData().messageName,
   Device.GRIPPER => GripperData().messageName,
   Device.SCIENCE => ScienceData().messageName,
+  Device.ANTENNA => AntennaFirmwareData().messageName,
+  Device.BASE_STATION => BaseStationData().messageName,
   _ => null,
 };
+
+/// Helpful extension methods to convert [GpsCoordinates] into meters
+extension GpsToMeters on GpsCoordinates {
+  /// Number of meters per degree of latitude
+  static const metersPerLatitude = 111.32 * 1000;
+  /// Number of radians per degree.
+  static const radiansPerDegree = pi / 180;
+
+  /// Number of meters per degree longitude at the given latitude.
+  ///
+  /// While the distance between rings of latitude remains constant all over the Earth, rings of
+  /// longitude stretch as you near the equator, and come to a single point at the poles. For that
+  /// reason, we need to calculate this number based on your current latitude.
+  ///
+  /// Source: https://stackoverflow.com/a/39540339/9392211
+  static double metersPerLongitude(double latitude) =>
+    40075 * cos(latitude * radiansPerDegree ) / 360 * 1000;
+
+  /// Converts [GpsCoordinates] into (lat, long) in meters.
+  ({double lat, double long}) get inMeters => (
+    lat: latitude * metersPerLatitude,
+    long: longitude * metersPerLongitude(latitude),
+  );
+}
+
+/// Extension to convert coordinates in meters into [GpsCoordinates].
+extension MetersToGps on ({num lat, num long}) {
+  /// Convert a record of (lat, long) in meters into [GpsCoordinates].
+  GpsCoordinates toGps() {
+    final degreeLatitude = lat / GpsToMeters.metersPerLatitude;
+    final degreeLongitude = long / GpsToMeters.metersPerLongitude(degreeLatitude);
+    return GpsCoordinates(latitude: degreeLatitude, longitude: degreeLongitude);
+  }
+}

@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: arm.proto
+//  source: relays.proto
 //
 // @dart = 2.12
 
