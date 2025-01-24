@@ -90,8 +90,9 @@ abstract class BurtSocket extends UdpSocket {
     required T message,
     required Duration timeout,
     required T Function(List<int> bytes) constructor,
+    SocketInfo? destination,
   }) async {
-    sendMessage(message);
+    sendMessage(message, destination: destination);
     final completer = Completer<bool>();
 
     late final StreamSubscription<T> subscription;
@@ -105,7 +106,7 @@ abstract class BurtSocket extends UdpSocket {
     );
 
     try {
-      return completer.future.timeout(timeout);
+      return await completer.future.timeout(timeout);
     } on TimeoutException {
       await subscription.cancel();
       return false;
