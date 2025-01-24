@@ -50,12 +50,16 @@ class UdpSocket extends Service {
   SocketInfo? destination;
 
   /// Whether or not the default destination should be kept when the socket is dispose.
-  /// 
+  ///
   /// If this is true, [destination] will not be set to null when [dispose] is called.
-  /// 
+  ///
   /// This is intended to prevent scenarios where the socket automatically restarts due
   /// to an allowed OS error (see [allowedErrors]), and the socket's destination can no
   /// longer receive messages by this socket due to [destination] being set null.
+  ///
+  /// It only makes sense to use this when communicating with a static IP. If the destination port
+  /// can change between resets, using this may mean the socket will try to communicate with a port
+  /// that no longer exists. Practically, that means only the Dashboard should set this to be true.
   final bool keepDestination;
 
   /// Opens a UDP socket on the given port that can send and receive data.
