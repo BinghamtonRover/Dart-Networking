@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the UdpSocket class from the burt_network library, for the Dart programming language.">
+  <title>UdpSocket class - burt_network library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">burt_network</a></li>
+    <li><a href="../burt_network/burt_network-library.html">burt_network.dart</a></li>
+    <li class="self-crumb">UdpSocket class</li>
+  </ol>
+  <div class="self-name">UdpSocket</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="burt_network&#47;burt_network-library-sidebar.html"
+    data-below-sidebar="burt_network&#47;UdpSocket-class-sidebar.html">
+    <div>
+  <div id="external-links" class="btn-group"><a title="View source code" class="source-link" href="https://github.com/BinghamtonRover/Dart-Networking/blob/main/lib/src/udp/udp_socket.dart#L22"><span class="material-symbols-outlined">description</span></a></div>
+<h1><span class="kind-class">UdpSocket</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Manages a UDP socket.</p>
+<p>UDP differs from TCP in the sense that it does not make any guarantees when sending messages
+and does not monitor its own connections. Because of this, it is much faster than TCP, which
+is why we are using it across the rover. Extend this class to implement your own UDP socket.</p>
+<ul>
+<li>Call <a href="../burt_network/UdpSocket/init.html">init</a> to open the socket on the given <a href="../burt_network/UdpSocket/port.html">port</a>.</li>
+<li>Call <a href="../burt_network/UdpSocket/send.html">send</a> to send raw data to another socket.</li>
+<li>Call <a href="../burt_network/UdpSocket/dispose.html">dispose</a> to close the socket.</li>
+<li>Use <a href="../burt_network/UdpSocket/stream.html">stream</a> to listen to new packets (<a href="https://api.dart.dev/stable/3.6.1/dart-io/Datagram-class.html">Datagram</a>s) as they arrive over the socket.</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../service/Service-class.html">Service</a></li>
+      <li>UdpSocket</li>
+    </ul>
+  </dd>
+
+        
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../burt_network/BurtSocket-class.html">BurtSocket</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="UdpSocket" class="callable">
+          <span class="name"><a href="../burt_network/UdpSocket/UdpSocket.html">UdpSocket</a></span><span class="signature">({<span class="parameter" id="-param-port"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">port</span>, </span><span class="parameter" id="-param-quiet"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">quiet</span> = <span class="default-value">false</span>, </span><span class="parameter" id="-param-destination"><span class="type-annotation"><a href="../burt_network/SocketInfo-class.html">SocketInfo</a>?</span> <span class="parameter-name">destination</span>, </span><span class="parameter" id="-param-keepDestination"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">keepDestination</span> = <span class="default-value">false</span></span>})</span>
+        </dt>
+        <dd>
+          Opens a UDP socket on the given port that can send and receive data.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="destination" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/destination.html">destination</a></span>
+  <span class="signature">&#8596; <a href="../burt_network/SocketInfo-class.html">SocketInfo</a>?</span>
+  
+
+</dt>
+<dd>
+  The destination port to send to.
+  <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="keepDestination" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/keepDestination.html">keepDestination</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Whether or not the default destination should be kept when the socket is dispose.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="logger" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/logger.html">logger</a></span>
+  <span class="signature">&#8594; <a href="../logging/BurtLogger-class.html">BurtLogger</a></span>
+  
+
+</dt>
+<dd>
+  A logger to capture important events during operation.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="messages" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/messages.html">messages</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../burt_network/WrappedMessage-class.html">WrappedMessage</a></span>&gt;</span></span>
+  
+
+</dt>
+<dd>
+  Wraps all incoming data in a <a href="../burt_network/WrappedMessage-class.html">WrappedMessage</a>.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="port" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/port.html">port</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/int-class.html">int</a>?</span>
+  
+
+</dt>
+<dd>
+  The port this socket is listening on. See <a href="https://api.dart.dev/stable/3.6.1/dart-io/RawDatagramSocket/bind.html">RawDatagramSocket.bind</a>.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="quiet" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/quiet.html">quiet</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Whether to silence "normal" output, like opening/closing and resetting sockets.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="stream" class="property">
+  <span class="name"><a href="../burt_network/UdpSocket/stream.html">stream</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.6.1/dart-io/Datagram-class.html">Datagram</a></span>&gt;</span></span>
+  
+
+</dt>
+<dd>
+  A stream containing all the data coming out of the socket.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="dispose" class="callable">
+  <span class="name"><a href="../burt_network/UdpSocket/dispose.html">dispose</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Closes the connection to the device.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="init" class="callable">
+  <span class="name"><a href="../burt_network/UdpSocket/init.html">init</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Initializes the connection to the device.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="onDisconnect" class="callable inherited">
+  <span class="name"><a href="../service/Service/onDisconnect.html">onDisconnect</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A callback to run when the program has disconnected from the Dashboard.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="send" class="callable">
+  <span class="name"><a href="../burt_network/UdpSocket/send.html">send</a></span><span class="signature">(<wbr><span class="parameter" id="send-param-data"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.6.1/dart-core/int-class.html">int</a></span>&gt;</span></span> <span class="parameter-name">data</span>, {</span><span class="parameter" id="send-param-destination"><span class="type-annotation"><a href="../burt_network/SocketInfo-class.html">SocketInfo</a>?</span> <span class="parameter-name">destination</span></span>})
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sends data to the given destination.
+  
+
+</dd>
+
+        <dt id="sendMessage" class="callable">
+  <span class="name"><a href="../burt_network/UdpSocket/sendMessage.html">sendMessage</a></span><span class="signature">(<wbr><span class="parameter" id="sendMessage-param-message"><span class="type-annotation"><a href="../protobuf/Message.html">Message</a></span> <span class="parameter-name">message</span>, {</span><span class="parameter" id="sendMessage-param-destination"><span class="type-annotation"><a href="../burt_network/SocketInfo-class.html">SocketInfo</a>?</span> <span class="parameter-name">destination</span></span>})
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sends a <a href="../protobuf/Message.html">Message</a> over the socket (in a <a href="../burt_network/WrappedMessage-class.html">WrappedMessage</a>).
+  
+
+</dd>
+
+        <dt id="sendWrapper" class="callable">
+  <span class="name"><a href="../burt_network/UdpSocket/sendWrapper.html">sendWrapper</a></span><span class="signature">(<wbr><span class="parameter" id="sendWrapper-param-wrapper"><span class="type-annotation"><a href="../burt_network/WrappedMessage-class.html">WrappedMessage</a></span> <span class="parameter-name">wrapper</span>, {</span><span class="parameter" id="sendWrapper-param-destination"><span class="type-annotation"><a href="../burt_network/SocketInfo-class.html">SocketInfo</a>?</span> <span class="parameter-name">destination</span></span>})
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sends a <a href="../burt_network/WrappedMessage-class.html">WrappedMessage</a> over the socket.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.6.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="allowedErrors" class="constant">
+    <span class="name "><a href="../burt_network/UdpSocket/allowedErrors-constant.html">allowedErrors</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.6.1/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.6.1/dart-core/int-class.html">int</a></span>&gt;</span></span>
+  
+
+</dt>
+<dd>
+  A collection of allowed <a href="https://api.dart.dev/stable/3.6.1/dart-io/OSError-class.html">OSError</a> codes.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">burt_network</a></li>
+    <li><a href="../burt_network/burt_network-library.html">burt_network</a></li>
+    <li class="self-crumb">UdpSocket class</li>
+</ol>
+
+    <h5>burt_network library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    burt_network
+      2.3.1
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
